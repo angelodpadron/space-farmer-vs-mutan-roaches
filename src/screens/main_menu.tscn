@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5um0qc285uou"]
+[gd_scene load_steps=5 format=3 uid="uid://b5um0qc285uou"]
 
 [ext_resource type="FontFile" uid="uid://djyh4jfbj6yp2" path="res://assets/fonts/VeniteAdoremus-rgRBA.ttf" id="1_exgak"]
+[ext_resource type="Script" path="res://src/screens/main_menu.gd" id="1_ylvkd"]
 [ext_resource type="FontFile" uid="uid://bma6g7fmbdbtk" path="res://assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf" id="2_w521h"]
 [ext_resource type="Texture2D" uid="uid://cj5ats4xmdxoi" path="res://assets/ui/characters.png" id="6_0lf7q"]
 
 [node name="MainMenu" type="Node"]
+script = ExtResource("1_ylvkd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -75,3 +77,5 @@ size_flags_horizontal = 3
 [node name="Character" type="TextureRect" parent="MarginContainer/HBoxContainer/RightContainer"]
 layout_mode = 2
 texture = ExtResource("6_0lf7q")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/Quit" to="." method="_on_quit_pressed"]
