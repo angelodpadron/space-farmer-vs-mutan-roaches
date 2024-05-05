@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk2h6k7lmskk1"]
+
+[ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
+[ext_resource type="Script" path="res://HUD.gd" id="3_jfml7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3py3"]
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1")]
+speed = 150.0
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+offset = Vector2(-640, -360)
+transform = Transform2D(1, 0, 0, 1, -640, -360)
+follow_viewport_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture = ExtResource("2")
+
+[node name="Crop" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Crop"]
+shape = SubResource("CircleShape2D_k3py3")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_jfml7")
+
+[node name="Crops" type="Label" parent="HUD"]
+offset_left = 12.0
+offset_top = 42.0
+offset_right = 61.0
+offset_bottom = 65.0
+text = "Crops:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crop Count" type="Label" parent="HUD/Crops"]
+layout_mode = 0
+offset_left = 68.0
+offset_right = 108.0
+offset_bottom = 23.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Inputs" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 75.0
+offset_right = 56.0
+offset_bottom = 98.0
+text = "Inputs:
+Q: put crop
+Space: collect crop
+E: put turret"
+
+[connection signal="crop_collected" from="Player" to="HUD" method="_on_player_crop_collected"]
