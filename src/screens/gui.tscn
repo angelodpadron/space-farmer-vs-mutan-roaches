@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbqq1akcure31"]
+[gd_scene load_steps=8 format=3 uid="uid://dbqq1akcure31"]
 
+[ext_resource type="Script" path="res://src/screens/gui.gd" id="1_cmjrl"]
 [ext_resource type="Texture2D" uid="uid://ccg5wcd5eitda" path="res://assets/ui/label_HP_bg.png" id="1_igik0"]
 [ext_resource type="Texture2D" uid="uid://boxhiqr0htfhc" path="res://assets/ui/hearth.png" id="2_iiqut"]
 [ext_resource type="FontFile" uid="uid://bma6g7fmbdbtk" path="res://assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf" id="3_12oyv"]
@@ -17,6 +18,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+script = ExtResource("1_cmjrl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -94,7 +96,7 @@ grow_vertical = 2
 texture = ExtResource("6_do1c7")
 stretch_mode = 2
 
-[node name="Value" type="Label" parent="HBoxContainer/Counter/Counters/Background"]
+[node name="Crop Count" type="Label" parent="HBoxContainer/Counter/Counters/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,6 +106,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_12oyv")
 theme_override_font_sizes/font_size = 28
-text = "5"
+text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Inputs" type="Label" parent="."]
+layout_mode = 2
+text = "Inputs:
+Q: put crop
+Space: collect crop
+E: put turret"

@@ -12,6 +12,7 @@ script = ExtResource("1_ylvkd")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 518.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 120
@@ -78,4 +79,5 @@ size_flags_horizontal = 3
 layout_mode = 2
 texture = ExtResource("6_0lf7q")
 
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/Quit" to="." method="_on_quit_pressed"]
