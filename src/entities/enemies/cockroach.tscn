@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbibl1x78rnnp"]
+
+[ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
+[ext_resource type="Script" path="res://src/entities/enemies/cockroach.gd" id="1_pu8oi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk0af"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7g1id"]
+radius = 108.0
+
+[sub_resource type="SystemFont" id="SystemFont_5ig1x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gslri"]
+font = SubResource("SystemFont_5ig1x")
+font_size = 11
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Cockroach" type="RigidBody2D"]
+position = Vector2(0, -9)
+gravity_scale = 0.0
+script = ExtResource("1_pu8oi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yk0af")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pnvhc")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_7g1id")
+
+[node name="Label" type="Label" parent="DetectionArea"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Cockroach"
+label_settings = SubResource("LabelSettings_gslri")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
+[connection signal="body_exited" from="DetectionArea" to="." method="on_body_leaved_detection_area"]

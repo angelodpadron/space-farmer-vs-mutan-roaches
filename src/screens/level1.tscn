@@ -3,21 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui.tscn" id="3_p1pem"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k3py3"]
+[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="4_wh8iy"]
 
 [node name="Main" type="Node"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="Camera2D" instance=ExtResource("3_p1pem")]
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
-
-[node name="Player" parent="." instance=ExtResource("1")]
-speed = 150.0
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("3_p1pem")]
+anchors_preset = -1
+anchor_right = 0.306424
+anchor_bottom = 0.0771605
+offset_right = 800.0
+offset_bottom = 600.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -28,9 +28,21 @@ follow_viewport_enabled = true
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 texture = ExtResource("2")
 
-[node name="Crop" type="Area2D" parent="."]
+[node name="Entities" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Crop"]
-shape = SubResource("CircleShape2D_k3py3")
+[node name="Player" parent="Entities" instance=ExtResource("1")]
+unique_name_in_owner = true
+speed = 150.0
 
-[connection signal="crop_collected" from="Player" to="Camera2D/GUI" method="_on_player_crop_collected"]
+[node name="Camera2D" type="Camera2D" parent="Entities/Player"]
+
+[node name="Cockroach" parent="Entities" instance=ExtResource("4_wh8iy")]
+position = Vector2(57, 171)
+
+[node name="Cockroach2" parent="Entities" instance=ExtResource("4_wh8iy")]
+position = Vector2(139, 171)
+
+[node name="Cockroach3" parent="Entities" instance=ExtResource("4_wh8iy")]
+position = Vector2(214, 171)
+
+[connection signal="crop_collected" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_collected"]
