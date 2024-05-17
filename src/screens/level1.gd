@@ -1,7 +1,4 @@
 extends Node
 
-@onready var player:Player = $Player
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	player.set_container(self)
+func _on_main_menu_pressed():
+	get_tree().change_scene_to_file("res://src/screens/main_menu.tscn")

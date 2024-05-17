@@ -12,6 +12,7 @@ radius = 213.338
 
 [node name="Turret" type="StaticBody2D"]
 light_mask = 8
+y_sort_enabled = true
 script = ExtResource("1_fayp8")
 PROJECTILE_SCENE = ExtResource("2_w8bw8")
 

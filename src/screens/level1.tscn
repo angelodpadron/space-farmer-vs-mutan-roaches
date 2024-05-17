@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk2h6k7lmskk1"]
+[gd_scene load_steps=10 format=3 uid="uid://bk2h6k7lmskk1"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
+[ext_resource type="Script" path="res://src/screens/level1.gd" id="1_ee7il"]
 [ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui.tscn" id="3_p1pem"]
 [ext_resource type="Texture2D" uid="uid://jhf52clmg4fs" path="res://assets/textures/planet/mouth.png" id="3_xq4nm"]
@@ -11,12 +12,13 @@
 [sub_resource type="Resource" id="Resource_4gv68"]
 script = ExtResource("7_iltni")
 enemy = ExtResource("6_8j2gq")
-enemy_count = 1
+enemy_count = 10
 time_start = 0
 time_end = 60
 spawn_delay = 1
 
 [node name="Main" type="Node"]
+script = ExtResource("1_ee7il")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -29,6 +31,14 @@ offset_bottom = 600.0
 grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="MainMenu" type="Button" parent="CanvasLayer"]
+offset_left = 29.0
+offset_top = 389.0
+offset_right = 133.0
+offset_bottom = 420.0
+text = "MAIN MENU
+"
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -62,4 +72,5 @@ unique_name_in_owner = true
 max_enemy_count = 10
 spawns = Array[ExtResource("7_iltni")]([SubResource("Resource_4gv68")])
 
+[connection signal="pressed" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]

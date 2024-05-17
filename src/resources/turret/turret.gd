@@ -33,9 +33,10 @@ func on_body_leaved_detection_area(body: Node) -> void:
 		fire_rate.stop()
 		print_debug("turret: target lost")
 
-func on_projectile_delete_request(projectile:Node):
-	projectile_container.remove_child(projectile)
-	projectile.queue_free()
+func on_projectile_delete_request(projectile:TurretProjectile):
+	projectile.delete_requested.disconnect(on_projectile_delete_request)
+	projectile_container.call_deferred("remove_child",projectile)
+	projectile.call_deferred("queue_free")
 
 func _on_fire_rate_timeout():
 	fire()
