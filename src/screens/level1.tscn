@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk2h6k7lmskk1"]
+[gd_scene load_steps=9 format=3 uid="uid://bk2h6k7lmskk1"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui.tscn" id="3_p1pem"]
 [ext_resource type="Texture2D" uid="uid://jhf52clmg4fs" path="res://assets/textures/planet/mouth.png" id="3_xq4nm"]
-[ext_resource type="Script" path="res://src/resources/CockroachSpawner.gd" id="4_j6vxf"]
+[ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/resources/spawner/enemy_spawner.tscn" id="5_tvk8a"]
+[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="6_8j2gq"]
+[ext_resource type="Script" path="res://src/resources/spawner/spawn_info.gd" id="7_iltni"]
+
+[sub_resource type="Resource" id="Resource_4gv68"]
+script = ExtResource("7_iltni")
+enemy = ExtResource("6_8j2gq")
+enemy_count = 1
+time_start = 0
+time_end = 60
+spawn_delay = 1
 
 [node name="Main" type="Node"]
 
@@ -30,6 +40,7 @@ follow_viewport_enabled = true
 texture = ExtResource("2")
 
 [node name="Entities" type="Node2D" parent="."]
+position = Vector2(579, 328)
 
 [node name="Mouth" type="Node2D" parent="Entities"]
 unique_name_in_owner = true
@@ -44,11 +55,11 @@ texture = ExtResource("3_xq4nm")
 
 [node name="Player" parent="Entities" instance=ExtResource("1")]
 unique_name_in_owner = true
-speed = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 
-[node name="CockroachSpawner" type="Node2D" parent="Entities"]
-script = ExtResource("4_j6vxf")
+[node name="EnemySpawner" parent="Entities" instance=ExtResource("5_tvk8a")]
+max_enemy_count = 10
+spawns = Array[ExtResource("7_iltni")]([SubResource("Resource_4gv68")])
 
 [connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]

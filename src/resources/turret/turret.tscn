@@ -16,6 +16,7 @@ script = ExtResource("1_fayp8")
 PROJECTILE_SCENE = ExtResource("2_w8bw8")
 
 [node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -34)
@@ -28,6 +29,7 @@ shape = SubResource("RectangleShape2D_s30xi")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 8
 
 [node name="Area" type="CollisionShape2D" parent="DetectionArea"]

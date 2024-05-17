@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var speed:float = 1
+@export var speed:float = 250
 @onready var crop_quantity:int = 0
 @onready var forward:Vector2 = Vector2.DOWN
 @onready var hitbox = $Hitbox
@@ -41,10 +41,11 @@ func _process(delta):
 		var crop_instance = CROP_SCENE.instantiate().initialize(instancing_container, hitbox.global_position + (forward * 20))
 		print_debug(str("crop instantiated in: ", global_position + forward))
 		
-	if Input.is_action_just_pressed("place_turret") and crop_quantity>0:
+	if Input.is_action_just_pressed("place_turret") and crop_quantity > 0:
 		_add_turret()
-		crop_quantity-=1
+		crop_quantity -= 1
 		emit_signal("crop_changed")
+		
 	if Input.is_action_just_pressed("collect_crop") and interactables:
 		_add_crop()
 
