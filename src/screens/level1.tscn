@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk2h6k7lmskk1"]
+[gd_scene load_steps=6 format=3 uid="uid://bk2h6k7lmskk1"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui.tscn" id="3_p1pem"]
-[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="4_wh8iy"]
+[ext_resource type="Texture2D" uid="uid://jhf52clmg4fs" path="res://assets/textures/planet/mouth.png" id="3_xq4nm"]
+[ext_resource type="Script" path="res://src/resources/CockroachSpawner.gd" id="4_j6vxf"]
 
 [node name="Main" type="Node"]
 
@@ -30,19 +31,24 @@ texture = ExtResource("2")
 
 [node name="Entities" type="Node2D" parent="."]
 
+[node name="Mouth" type="Node2D" parent="Entities"]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="Entities/Mouth"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Mouth"
+
+[node name="Sprite2D" type="Sprite2D" parent="Entities/Mouth"]
+texture = ExtResource("3_xq4nm")
+
 [node name="Player" parent="Entities" instance=ExtResource("1")]
 unique_name_in_owner = true
 speed = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 
-[node name="Cockroach" parent="Entities" instance=ExtResource("4_wh8iy")]
-position = Vector2(57, 171)
-
-[node name="Cockroach2" parent="Entities" instance=ExtResource("4_wh8iy")]
-position = Vector2(139, 171)
-
-[node name="Cockroach3" parent="Entities" instance=ExtResource("4_wh8iy")]
-position = Vector2(214, 171)
+[node name="CockroachSpawner" type="Node2D" parent="Entities"]
+script = ExtResource("4_j6vxf")
 
 [connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]

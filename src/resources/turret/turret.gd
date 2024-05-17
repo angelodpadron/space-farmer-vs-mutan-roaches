@@ -1,3 +1,5 @@
+class_name Turret
+
 extends StaticBody2D
 
 @export var PROJECTILE_SCENE: PackedScene

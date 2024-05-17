@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="SFVMR - UI"
+config/name="SFVMR"
 run/main_scene="res://src/screens/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
