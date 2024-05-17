@@ -16,3 +16,10 @@ shape = SubResource("CircleShape2D_actnm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_j54k7")
+
+[node name="LifeTime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

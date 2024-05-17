@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Cockroach
+
 @export var speed: float = 100
 
 var target: Node = null

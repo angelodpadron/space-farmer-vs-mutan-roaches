@@ -14,7 +14,7 @@ const TURRENT_SCENE: PackedScene = preload("res://src/resources/turret/turret.ts
 
 var instancing_contaier = null
 
-signal crop_collected
+signal crop_changed
 
 func _ready() -> void:
 	initialize()
@@ -41,8 +41,10 @@ func _process(delta):
 		var crop_instance = CROP_SCENE.instantiate().initialize(instancing_contaier, hitbox.global_position + (forward * 20))
 		print_debug(str("crop instantiated in: ", global_position + forward))
 		
-	if Input.is_action_just_pressed("place_turret"):
+	if Input.is_action_just_pressed("place_turret") and crop_quantity>0:
 		_add_turret()
+		crop_quantity-=1
+		emit_signal("crop_changed")
 	if Input.is_action_just_pressed("collect_crop") and interactables:
 		_add_crop()
 
@@ -52,7 +54,7 @@ func _add_crop():
 	if cur_interaction.collectable:
 		cur_interaction.collect(self)
 		crop_quantity += 1
-		emit_signal("crop_collected")
+		emit_signal("crop_changed")
 
 func _add_turret():
 	var turret_instance = TURRENT_SCENE.instantiate().initialize(instancing_contaier, hitbox.global_position + (forward * 20))

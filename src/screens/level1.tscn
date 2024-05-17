@@ -45,4 +45,4 @@ position = Vector2(139, 171)
 [node name="Cockroach3" parent="Entities" instance=ExtResource("4_wh8iy")]
 position = Vector2(214, 171)
 
-[connection signal="crop_collected" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_collected"]
+[connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]
