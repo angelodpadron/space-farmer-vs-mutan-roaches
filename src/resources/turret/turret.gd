@@ -6,8 +6,9 @@ extends StaticBody2D
 @onready var fire_position = $FirePosition
 @onready var fire_rate = $FireRate
 
-var target: Node
-var projectile_container:Node
+var target: Cockroach
+var targets: Array[Cockroach]
+var projectile_container: Node
 
 func fire():
 	var projectile_instance:TurretProjectile = PROJECTILE_SCENE.instantiate()
@@ -19,19 +20,26 @@ func fire():
 func initialize(container: Node, spawn_position: Vector2) -> void:
 	container.add_child(self)
 	projectile_container=container
-	global_position = spawn_position	
-
-func on_body_entered_detection_area(body: Node) -> void:
+	global_position = spawn_position
+	
+func on_body_entered_detection_area(body: Cockroach) -> void:
+	self.targets.append(body)
 	if self.target == null:
 		self.target = body
 		fire_rate.start()
 		print_debug("turret: target aquired")
 
-func on_body_leaved_detection_area(body: Node) -> void:
+func on_body_leaved_detection_area(body: Cockroach) -> void:
+	self.targets.erase(body)
 	if self.target == body:
+		print_debug("turret: target lost")
+		if self.targets.size() > 0:
+			self.target = self.targets.pick_random()
+			print_debug("turret: switching target")
+			return
 		self.target = null
 		fire_rate.stop()
-		print_debug("turret: target lost")
+		print_debug("turret: searching...")
 
 func on_projectile_delete_request(projectile:TurretProjectile):
 	projectile.delete_requested.disconnect(on_projectile_delete_request)
