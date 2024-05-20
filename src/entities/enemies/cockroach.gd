@@ -31,7 +31,5 @@ func on_body_leaved_detection_area(body: Node) -> void:
 		
 func notify_hit() -> void:
 	print_debug("cockroach: i've been shot!")
-	set_physics_process(false)
-	hide()
-	collision_layer = 0
-	emit_signal("died")
+	queue_free()
+	
