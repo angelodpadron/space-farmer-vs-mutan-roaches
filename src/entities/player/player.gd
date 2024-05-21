@@ -2,11 +2,15 @@ extends CharacterBody2D
 
 class_name Player
 
+signal health_changed(health)
+
 @export var speed:float = 250
 @onready var crop_quantity:int = 0
 @onready var forward:Vector2 = Vector2.DOWN
-@onready var hitbox = $Hitbox
+@onready var hitbox: CollisionShape2D = $Hitbox
 @onready var interactables:Array = []
+
+var health: float = 100.0
 
 # spawnables
 const CROP_SCENE: PackedScene = preload("res://src/resources/crop/crop.tscn")
@@ -22,20 +26,18 @@ func _ready() -> void:
 func initialize(instancing_container: Node = get_parent()) -> void:
 	self.instancing_container = instancing_container
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	var horizontal_dir:int = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	var vertical_dir:int = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
-
 	var velocity:Vector2 = Vector2(horizontal_dir,vertical_dir).normalized() * speed
 
 	if velocity != Vector2.ZERO:
 		forward = velocity.normalized()
-		#print_debug(velocity)
 	
 	set_velocity(velocity)
 	move_and_slide()
 
-func _process(delta):
+func _process(delta) -> void:
 	if Input.is_action_just_pressed("place_crop"):
 		print_debug(forward)
 		var crop_instance = CROP_SCENE.instantiate().initialize(instancing_container, hitbox.global_position + (forward * 20))
@@ -50,18 +52,35 @@ func _process(delta):
 		_add_crop()
 
 
-func _add_crop():
+func _add_crop() -> void:
 	var cur_interaction = interactables[0]
 	if cur_interaction.collectable:
 		cur_interaction.collect(self)
 		crop_quantity += 1
 		emit_signal("crop_changed")
 
-func _add_turret():
+func _add_turret() -> void:
 	var turret_instance = TURRENT_SCENE.instantiate().initialize(instancing_container, hitbox.global_position + (forward * 20))
 
-func _on_interaction_area_interactable_entered(area:Crop):
+func _on_interaction_area_interactable_entered(area:Crop) -> void:
 	interactables.insert(0, area)
 
-func _on_interaction_area_interactable_exited(area:Crop):
+func _on_interaction_area_interactable_exited(area:Crop) -> void:
 	interactables.erase(area)
+	
+func notify_hit(damage_amount: float) -> void:
+	print_debug("player: ouch!", damage_amount)
+	health -= damage_amount
+	
+	if health <= 0:
+		print_debug("player: i'm dead")
+		emit_signal("health_changed", 0)
+		handle_dead()
+		return
+	
+	emit_signal("health_changed", health)
+	
+func handle_dead() -> void:
+	collision_layer = 0
+	set_physics_process(false)
+	hide()
