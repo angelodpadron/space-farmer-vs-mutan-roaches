@@ -7,8 +7,8 @@ extends StaticBody2D
 @onready var fire_rate = $FireRate
 @onready var health_bar = $HealthBar
 
-var target: Enemy
-var targets: Array[Enemy]
+var target: Cockroach
+var targets: Array[Cockroach]
 var projectile_container: Node
 
 var health: float = 50
@@ -26,14 +26,14 @@ func initialize(container: Node, spawn_position: Vector2) -> void:
 	global_position = spawn_position
 	health_bar.init_health(health)
 	
-func on_body_entered_detection_area(body: Enemy) -> void:
+func on_body_entered_detection_area(body: Cockroach) -> void:
 	self.targets.append(body)
 	if self.target == null:
 		self.target = body
 		fire_rate.start()
 		print_debug("turret: target aquired")
 
-func on_body_leaved_detection_area(body: Enemy) -> void:
+func on_body_leaved_detection_area(body: Cockroach) -> void:
 	self.targets.erase(body)
 	if self.target == body:
 		print_debug("turret: target lost")
