@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtswk33m7i1du"]
+
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_1k1hb"]
+[ext_resource type="Script" path="res://src/entities/npc/mouth.gd" id="1_4rw1f"]
+[ext_resource type="Texture2D" uid="uid://jhf52clmg4fs" path="res://assets/textures/planet/mouth.png" id="2_1erhd"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_5h5kl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ingb1"]
+size = Vector2(31, 16)
+
+[node name="Mouth" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_4rw1f")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_5h5kl")]
+offset_left = -57.0
+offset_top = -23.0
+offset_right = 58.0
+offset_bottom = -12.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ingb1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -22.0
+offset_top = 10.0
+offset_right = 22.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("1_1k1hb")
+text = "Mouth"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1erhd")

@@ -6,6 +6,7 @@ signal delete_requested(projectile)
 
 @onready var hitbox: Area2D = $Hitbox
 @export var velocity: float = 300
+@export var damage_amout: float = 5
 
 var direction: Vector2
 
@@ -22,5 +23,5 @@ func _on_life_time_timeout():
 
 func _on_hitbox_body_entered(body):
 	if body.has_method("notify_hit"):
-		body.notify_hit()
+		body.notify_hit(damage_amout)
 	emit_signal("delete_requested", self)

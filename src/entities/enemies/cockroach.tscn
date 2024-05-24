@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbibl1x78rnnp"]
+[gd_scene load_steps=9 format=3 uid="uid://dbibl1x78rnnp"]
 
 [ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
 [ext_resource type="Script" path="res://src/entities/enemies/cockroach.gd" id="1_pu8oi"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_r6vau"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk0af"]
 radius = 9.0
@@ -18,15 +19,21 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwj7i"]
-radius = 6.08276
+radius = 9.0
 
 [node name="Cockroach" type="RigidBody2D"]
 visibility_layer = 8
 position = Vector2(0, -9)
 collision_layer = 8
-collision_mask = 24
+collision_mask = 25
 gravity_scale = 0.0
 script = ExtResource("1_pu8oi")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_r6vau")]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 19.0
+offset_bottom = -16.0
 
 [node name="AttackRate" type="Timer" parent="."]
 
@@ -38,20 +45,23 @@ texture = ExtResource("1_pnvhc")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 7
+collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_7g1id")
 
 [node name="Label" type="Label" parent="DetectionArea"]
-offset_right = 40.0
-offset_bottom = 23.0
+visible = false
+offset_left = -26.0
+offset_top = 12.0
+offset_right = 30.0
+offset_bottom = 35.0
 text = "Cockroach"
 label_settings = SubResource("LabelSettings_gslri")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 0
+collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_qwj7i")

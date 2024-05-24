@@ -4,9 +4,9 @@ class_name Crop extends Area2D
 @onready var grow_timer = $"Grow Timer"
 @onready var animation = $Animation
 
-func initialize(container:Node, spawn_position:Vector2) -> void:
+func initialize(container: Node, spawn_position: Vector2) -> void:
 	container.add_child(self)
-	global_position=spawn_position
+	global_position = spawn_position
 	grow_timer.start()
 	animation.play("grow")	
 

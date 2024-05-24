@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="SFVMR"
-run/main_scene="res://src/screens/main_menu.tscn"
+run/main_scene="res://src/screens/menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor]
+
+movie_writer/movie_file="C:/Dev/unq/intro-dv/boss/space-farmer-vs-mutan-roaches/debug/sample.avi"
 
 [input]
 
@@ -76,3 +80,4 @@ collect_crop={
 2d_physics/layer_3="crop"
 2d_physics/layer_4="enemie"
 2d_physics/layer_5="projectile"
+2d_physics/layer_6="npc"

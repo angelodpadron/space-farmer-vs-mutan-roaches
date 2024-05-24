@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5um0qc285uou"]
+
+[ext_resource type="Script" path="res://src/screens/menus/main_menu.gd" id="1_ylvkd"]
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_3y70t"]
+[ext_resource type="Texture2D" uid="uid://cj5ats4xmdxoi" path="res://assets/ui/characters.png" id="6_0lf7q"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_ylvkd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LeftContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3y70t")
+theme_override_font_sizes/font_size = 60
+text = "Space Farmer
+vs
+Mutan Roaches"
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="NewGame" type="Button" parent="MarginContainer/HBoxContainer/LeftContainer/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3y70t")
+theme_override_font_sizes/font_size = 24
+text = "New Game"
+flat = true
+alignment = 0
+
+[node name="Options" type="Button" parent="MarginContainer/HBoxContainer/LeftContainer/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3y70t")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+flat = true
+alignment = 0
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer/LeftContainer/Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3y70t")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+flat = true
+alignment = 0
+
+[node name="Info" type="Label" parent="MarginContainer/HBoxContainer/LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3y70t")
+theme_override_font_sizes/font_size = 16
+text = "Ver. 0.0.1"
+
+[node name="RightContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Character" type="TextureRect" parent="MarginContainer/HBoxContainer/RightContainer"]
+layout_mode = 2
+texture = ExtResource("6_0lf7q")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/Quit" to="." method="_on_quit_pressed"]

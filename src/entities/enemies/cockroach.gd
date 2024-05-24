@@ -3,17 +3,20 @@ extends RigidBody2D
 class_name Cockroach
 
 @export var speed: float = 100
+@export var health: float = 15
+@export var damage_amount: float = 1
+
 @onready var attack_rate: Timer = $AttackRate
+@onready var healthbar: ProgressBar = $HealthBar
 
 var main_target: Node = null
 var current_target: Node = null
 var target_attacked: Node = null
-
-var damage_amount = 10.0
 	
 func initialize(body: Node) -> void:
 	main_target = body
 	current_target = body
+	healthbar.init_health(health)
 	
 func _physics_process(delta):	
 	var velocity = global_position.direction_to(current_target.global_position)
@@ -24,6 +27,7 @@ func on_body_entered_detection_area(body: Node) -> void:
 		return
 		
 	print_debug("cockroach: found new target")
+	
 	current_target = body
 	
 func on_body_leaved_detection_area(body: Node) -> void:
@@ -31,22 +35,27 @@ func on_body_leaved_detection_area(body: Node) -> void:
 	if current_target == body:
 		current_target = main_target
 		
-func notify_hit() -> void:
+func notify_hit(damage_amount: float) -> void:
+	health -= damage_amount
+	healthbar.health = health
 	print_debug("cockroach: i've been shot!")
-	queue_free()
+	if health <= 0:
+		queue_free()
 
-func _on_hitbox_body_entered(body: Player):
+func _on_hitbox_body_entered(body: Node2D):
 	if self.target_attacked == null:
 		self.target_attacked = body
+		attack_target()
 		attack_rate.start()
 
-func _on_hitbox_body_exited(body: Player):
+func _on_hitbox_body_exited(body: Node2D):
 	if self.target_attacked == body:
 		self.target_attacked = null
 		attack_rate.stop()
 
 func attack_target():
-	self.current_target.notify_hit(damage_amount)
+	if (current_target.has_method("notify_hit")):
+		self.current_target.notify_hit(damage_amount)
 	
 
 
