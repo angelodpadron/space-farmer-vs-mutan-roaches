@@ -33,3 +33,8 @@ text = "Mouth"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1erhd")
+
+[node name="RumbleTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true

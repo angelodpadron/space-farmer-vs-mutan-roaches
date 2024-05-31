@@ -6,4 +6,4 @@ func _on_quit_pressed():
 
 
 func _on_new_game_pressed():
-	get_tree().change_scene_to_file("res://src/screens/level1.tscn")
+	get_tree().change_scene_to_file("res://src/screens/levels/level1.tscn")

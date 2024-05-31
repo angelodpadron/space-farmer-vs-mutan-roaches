@@ -4,8 +4,17 @@ extends Node2D
 
 @onready var player: Node = $%Player
 @onready var main_target: Node = $%Mouth
+@onready var timer: Timer = $SpawnTimer
 
-var time = 0
+var time: int = 0
+
+func _ready():
+	timer.timeout.connect(_on_spawn_timer_timeout)
+	main_target.rumble.connect(handle_rumble)
+	
+func handle_rumble() -> void:
+	print_debug("spawner: rumble detected, spawning enemies!")
+	timer.start(1.0)
 
 func spawn_enemies() -> void:
 	time += 1

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk2h6k7lmskk1"]
+[gd_scene load_steps=9 format=3 uid="uid://m1ymcbgrrtb3"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
-[ext_resource type="Script" path="res://src/screens/levels/level1.gd" id="1_ee7il"]
 [ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
-[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui.tscn" id="3_p1pem"]
+[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="3_p1pem"]
 [ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="4_88axw"]
 [ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/resources/spawner/enemy_spawner.tscn" id="5_tvk8a"]
 [ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="6_8j2gq"]
@@ -15,10 +14,9 @@ enemy = ExtResource("6_8j2gq")
 enemy_count = 1
 time_start = 0
 time_end = 60
-spawn_delay = 0
+spawn_delay = 1
 
 [node name="Main" type="Node"]
-script = ExtResource("1_ee7il")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -42,7 +40,6 @@ text = "MAIN MENU
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
-visible = false
 offset = Vector2(-640, -360)
 transform = Transform2D(1, 0, 0, 1, -640, -360)
 follow_viewport_enabled = true
@@ -51,10 +48,10 @@ follow_viewport_enabled = true
 texture = ExtResource("2")
 
 [node name="Entities" type="Node2D" parent="."]
+position = Vector2(579, 328)
 
 [node name="Mouth" parent="Entities" instance=ExtResource("4_88axw")]
 unique_name_in_owner = true
-health = 500.0
 
 [node name="Player" parent="Entities" instance=ExtResource("1")]
 unique_name_in_owner = true

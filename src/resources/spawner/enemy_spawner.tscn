@@ -7,6 +7,3 @@ position = Vector2(-2, -160)
 script = ExtResource("1_t4l5d")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
-
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
