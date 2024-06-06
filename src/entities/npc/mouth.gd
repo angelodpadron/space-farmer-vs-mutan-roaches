@@ -8,7 +8,6 @@ signal rumble
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var rumble_timer: Timer = $RumbleTimer
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	health_bar.init_health(health)
 	rumble_timer.timeout.connect(demand_food)

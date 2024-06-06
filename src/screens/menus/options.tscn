@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://birrju5jro8vn"]
+
+[ext_resource type="Script" path="res://src/screens/menus/options.gd" id="1_mjo28"]
+[ext_resource type="PackedScene" uid="uid://dd0jw2uxsq7b0" path="res://src/screens/menus/action_input.tscn" id="2_re8py"]
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_yg83y"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mjo28")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -260.0
+offset_right = -128.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_yg83y")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="Button" type="Button" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_yg83y")
+theme_override_font_sizes/font_size = 24
+text = "Return"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ActionInput" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "W"
+action_name = "GO UP"
+
+[node name="ActionInput2" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "S"
+action_name = "GO DOWN"
+
+[node name="ActionInput3" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "A"
+action_name = "GO LEFT"
+
+[node name="ActionInput4" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "D"
+action_name = "GO RIGHT"
+
+[node name="ActionInput5" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "LEFT CLICK"
+action_name = "PICK UP"
+
+[node name="ActionInput6" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_re8py")]
+layout_mode = 2
+action_input = "E"
+action_name = "ADD TURRET"
+
+[connection signal="pressed" from="Panel/MarginContainer/Button" to="." method="_on_return_button_pressed"]

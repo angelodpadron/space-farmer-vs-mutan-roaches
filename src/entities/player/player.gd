@@ -8,18 +8,13 @@ signal crop_changed
 
 @export var speed: float = 250
 @export var health: float = 100.0
+@export var turret_scene: PackedScene
 
 @onready var crop_quantity: int = 0
 @onready var forward: Vector2 = Vector2.DOWN
 @onready var hitbox: CollisionShape2D = $Hitbox
-@onready var interactables: Array = []
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
-
-# spawnables
-const CROP_SCENE: PackedScene = preload("res://src/resources/crop/crop.tscn")
-const TURRENT_SCENE: PackedScene = preload("res://src/resources/turret/turret.tscn")
-
 
 func _physics_process(_delta) -> void:
 	var horizontal_dir: int = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -32,39 +27,24 @@ func _physics_process(_delta) -> void:
 	set_velocity(velocity)
 	move_and_slide()
 
-func _process(delta) -> void:
-	if Input.is_action_just_pressed("place_crop"):
-		var crop_instance = CROP_SCENE.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
-		print_debug(str("crop instantiated in: ", global_position + forward))
-		
+func _process(_delta) -> void:
 	if Input.is_action_just_pressed("place_turret") and crop_quantity > 0:
 		_add_turret()
 		crop_quantity -= 1
-		emit_signal("crop_changed")
-		
-	if Input.is_action_just_pressed("collect_crop") and interactables:
-		_add_crop()
-
-
-func _add_crop() -> void:
-	var cur_interaction = interactables[0]
-	if cur_interaction.collectable:
-		cur_interaction.collect(self)
-		crop_quantity += 1
-		emit_signal("crop_changed")
-
+		emit_signal("crop_changed")	
+	
 func add_crop() -> void:
 	crop_quantity += 1
 	emit_signal("crop_changed")
 
 func _add_turret() -> void:
-	var turret_instance = TURRENT_SCENE.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
+	var turret_instance = turret_scene.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
 
-func _on_interaction_area_interactable_entered(area: Crop) -> void:
-	interactables.insert(0, area)
+func _on_interaction_area_interactable_entered(area: Node) -> void:
+	pass
 
-func _on_interaction_area_interactable_exited(area: Crop) -> void:
-	interactables.erase(area)
+func _on_interaction_area_interactable_exited(area: Node) -> void:
+	pass
 	
 func notify_hit(damage_amount: float) -> void:
 	print_debug("player: ouch!", damage_amount)

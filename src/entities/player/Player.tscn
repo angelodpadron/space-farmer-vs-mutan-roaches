@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c60c8bomjw5g"]
+[gd_scene load_steps=9 format=3 uid="uid://c60c8bomjw5g"]
 
 [ext_resource type="Texture2D" uid="uid://bh4rcoxegbqh0" path="res://assets/textures/player/astroFarmer.png" id="1"]
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://uwe8qmpynkes" path="res://src/resources/turret/turret.tscn" id="2_i8jcp"]
 [ext_resource type="AudioStream" uid="uid://ccvea73egajyt" path="res://assets/audio/sfx/hit.wav" id="3_b4u2j"]
 
 [sub_resource type="CircleShape2D" id="1"]
@@ -25,6 +26,7 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("2")
+turret_scene = ExtResource("2_i8jcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)

@@ -42,19 +42,15 @@ func on_body_entered_detection_area(body: Cockroach) -> void:
 	if self.target == null:
 		self.target = body
 		fire_rate.start()
-		print_debug("turret: target aquired")
 
 func on_body_leaved_detection_area(body: Cockroach) -> void:
 	self.targets.erase(body)
 	if self.target == body:
-		print_debug("turret: target lost")
 		if self.targets.size() > 0:
 			self.target = self.targets.pick_random()
-			print_debug("turret: switching target")
 			return
 		self.target = null
 		fire_rate.stop()
-		print_debug("turret: searching...")
 
 func on_projectile_delete_request(projectile: TurretProjectile):
 	projectile.delete_requested.disconnect(on_projectile_delete_request)
@@ -62,7 +58,6 @@ func on_projectile_delete_request(projectile: TurretProjectile):
 	projectile.call_deferred("queue_free")
 	
 func notify_hit(damage_amount: float) -> void:
-	print_debug("turret: damage")
 	health -= damage_amount
 	health_bar.health = health
 	

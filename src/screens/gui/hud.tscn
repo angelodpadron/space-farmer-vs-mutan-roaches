@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbqq1akcure31"]
+[gd_scene load_steps=5 format=3 uid="uid://dbqq1akcure31"]
 
 [ext_resource type="Script" path="res://src/screens/gui/hud.gd" id="1_ns2ru"]
-[ext_resource type="Texture2D" uid="uid://ccg5wcd5eitda" path="res://assets/ui/label_HP_bg.png" id="2_h42j7"]
-[ext_resource type="Texture2D" uid="uid://boxhiqr0htfhc" path="res://assets/ui/hearth.png" id="3_4sdfd"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="4_lq6ea"]
-[ext_resource type="Texture2D" uid="uid://c7yag73oim8m2" path="res://assets/ui/lifebar_bg.png" id="5_uedh3"]
-[ext_resource type="Texture2D" uid="uid://b4jcb7rgahtdw" path="res://assets/ui/lifebar_fill.png" id="6_hvm1x"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="4_ncy8v"]
 [ext_resource type="Texture2D" uid="uid://npo0ctbm3nnr" path="res://assets/ui/plant.png" id="7_6f4nc"]
 
 [node name="HUD" type="MarginContainer"]
@@ -30,47 +27,23 @@ size_flags_horizontal = 3
 
 [node name="Bar" type="HBoxContainer" parent="HBoxContainer/Bars"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Count" type="MarginContainer" parent="HBoxContainer/Bars/Bar"]
+[node name="Value" type="Label" parent="HBoxContainer/Bars/Bar"]
 layout_mode = 2
-
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/Bars/Bar/Count"]
-custom_minimum_size = Vector2(100, 40)
-layout_mode = 2
-texture = ExtResource("2_h42j7")
-
-[node name="Title" type="TextureRect" parent="HBoxContainer/Bars/Bar/Count/Background"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -30.5
-offset_right = 50.0
-offset_bottom = 33.5
-grow_vertical = 2
-texture = ExtResource("3_4sdfd")
-stretch_mode = 3
-
-[node name="Value" type="Label" parent="HBoxContainer/Bars/Bar/Count/Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -7.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_lq6ea")
 theme_override_font_sizes/font_size = 28
 text = "10"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gauge" type="TextureProgressBar" parent="HBoxContainer/Bars/Bar"]
+[node name="HealthBar" parent="HBoxContainer/Bars/Bar" instance=ExtResource("4_ncy8v")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 10)
 layout_mode = 2
-value = 50.0
-texture_under = ExtResource("5_uedh3")
-texture_progress = ExtResource("6_hvm1x")
+size_flags_horizontal = 8
+size_flags_vertical = 4
 
 [node name="Counter" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -81,20 +54,18 @@ layout_mode = 2
 [node name="Background" type="NinePatchRect" parent="HBoxContainer/Counter/Counters"]
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
-texture = ExtResource("2_h42j7")
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer/Counter/Counters/Background"]
-custom_minimum_size = Vector2(50, 40)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -20.0
-offset_right = 50.0
-offset_bottom = 20.0
+offset_right = 64.0
+offset_bottom = 44.0
 grow_vertical = 2
 texture = ExtResource("7_6f4nc")
-stretch_mode = 2
+flip_h = true
 
 [node name="Crop Count" type="Label" parent="HBoxContainer/Counter/Counters/Background"]
 layout_mode = 1
@@ -111,11 +82,3 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="Inputs" type="Label" parent="."]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_lq6ea")
-text = "Inputs:
-Q: put crop
-Space: collect crop
-E: put turret"

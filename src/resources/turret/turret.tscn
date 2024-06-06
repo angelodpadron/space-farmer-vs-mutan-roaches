@@ -17,10 +17,10 @@ script = ExtResource("1_fayp8")
 PROJECTILE_SCENE = ExtResource("2_w8bw8")
 
 [node name="HealthBar" parent="." instance=ExtResource("3_b4va5")]
-offset_left = -39.0
-offset_top = -82.0
-offset_right = 33.0
-offset_bottom = -78.0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = -30.0
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5

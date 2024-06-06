@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd0jw2uxsq7b0"]
+
+[ext_resource type="Script" path="res://src/screens/menus/ActionInput.gd" id="1_lfwy3"]
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_vsvsj"]
+
+[node name="ActionInput" type="PanelContainer"]
+script = ExtResource("1_lfwy3")
+action_input = "[INPUT]"
+action_name = "[DESCRIPTION]"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Input" type="Label" parent="HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vsvsj")
+theme_override_font_sizes/font_size = 24
+text = "test"
+vertical_alignment = 1
+
+[node name="Action" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vsvsj")
+theme_override_font_sizes/font_size = 24
+text = "test"
+vertical_alignment = 1

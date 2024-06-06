@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=16 format=3 uid="uid://m1ymcbgrrtb3"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/pause_menu.tscn" id="2_ajmyj"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="3_p1pem"]
 [ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="4_88axw"]
 [ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/utils/seedpack.tscn" id="4_gffw3"]
@@ -14,7 +15,7 @@
 [sub_resource type="Resource" id="Resource_4gv68"]
 script = ExtResource("7_iltni")
 enemy = ExtResource("6_8j2gq")
-enemy_count = 1
+enemy_count = 5
 time_start = 0
 time_end = 60
 spawn_delay = 1
@@ -159,7 +160,7 @@ sources/1 = SubResource("TileSetAtlasSource_ok8vv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="CanvasLayer" instance=ExtResource("3_p1pem")]
+[node name="GUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("3_p1pem")]
 anchors_preset = -1
 anchor_right = 0.306424
 anchor_bottom = 0.0771605
@@ -167,15 +168,10 @@ offset_right = 800.0
 offset_bottom = 600.0
 grow_horizontal = 1
 grow_vertical = 1
+player = NodePath("../../Entities/Player")
 metadata/_edit_use_anchors_ = true
 
-[node name="MainMenu" type="Button" parent="CanvasLayer"]
-offset_left = 29.0
-offset_top = 389.0
-offset_right = 133.0
-offset_bottom = 420.0
-text = "MAIN MENU
-"
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_ajmyj")]
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -255,6 +251,5 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "top"
 layer_2/tile_data = PackedInt32Array()
 
-[connection signal="pressed" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]
 [connection signal="health_changed" from="Entities/Player" to="CanvasLayer/GUI" method="update_player_health_hud"]
