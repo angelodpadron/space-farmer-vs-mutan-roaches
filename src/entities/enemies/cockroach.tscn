@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbibl1x78rnnp"]
+[gd_scene load_steps=10 format=3 uid="uid://dbibl1x78rnnp"]
 
 [ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
 [ext_resource type="Script" path="res://src/entities/enemies/cockroach.gd" id="1_pu8oi"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_r6vau"]
+[ext_resource type="Texture2D" uid="uid://btugyjykp6pwj" path="res://assets/textures/turret/turret.png" id="4_h7rjg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk0af"]
-radius = 9.0
+radius = 6.08276
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7g1id"]
 radius = 108.0
@@ -21,29 +22,44 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwj7i"]
 radius = 9.0
 
-[node name="Cockroach" type="RigidBody2D"]
+[node name="Cockroach" type="CharacterBody2D"]
 visibility_layer = 8
 position = Vector2(0, -9)
 collision_layer = 8
 collision_mask = 25
-gravity_scale = 0.0
+motion_mode = 1
+slide_on_ceiling = false
 script = ExtResource("1_pu8oi")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_r6vau")]
-offset_left = -20.0
+offset_left = -16.0
 offset_top = -20.0
-offset_right = 19.0
+offset_right = 16.0
 offset_bottom = -16.0
 
 [node name="AttackRate" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_yk0af")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pnvhc")
 
+[node name="Antenna1" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(4, -9)
+rotation = 0.434562
+scale = Vector2(0.01, 0.1)
+texture = ExtResource("4_h7rjg")
+
+[node name="Antenna2" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-5, -9)
+rotation = -0.411446
+scale = Vector2(0.01, 0.1)
+texture = ExtResource("4_h7rjg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_yk0af")
+
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 35
 
@@ -66,7 +82,6 @@ collision_mask = 35
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_qwj7i")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="AttackRate" to="." method="attack_target"]
 [connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
 [connection signal="body_exited" from="DetectionArea" to="." method="on_body_leaved_detection_area"]

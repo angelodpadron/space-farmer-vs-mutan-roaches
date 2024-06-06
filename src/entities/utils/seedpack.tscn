@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://7uta0nxar4dy"]
+
+[ext_resource type="Texture2D" uid="uid://ccylp330sr4p7" path="res://assets/textures/temp-tilesheet.png" id="1_tfnue"]
+[ext_resource type="Script" path="res://src/entities/utils/seedpack.gd" id="1_xn78s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k20j"]
+atlas = ExtResource("1_tfnue")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a0fox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k20j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jklni"]
+radius = 5.09902
+
+[node name="Seedpack" type="StaticBody2D"]
+scale = Vector2(3, 3)
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("1_xn78s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a0fox")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jklni")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 class_name Cockroach
 
@@ -8,6 +8,7 @@ class_name Cockroach
 
 @onready var attack_rate: Timer = $AttackRate
 @onready var healthbar: ProgressBar = $HealthBar
+@onready var body_sprite: Sprite2D = $Sprite2D
 
 var main_target: Node = null
 var current_target: Node = null
@@ -20,25 +21,27 @@ func initialize(body: Node) -> void:
 	
 func _physics_process(delta):	
 	var velocity = global_position.direction_to(current_target.global_position)
+	var angle_to_target = global_position.direction_to(current_target.global_position).angle()
+	body_sprite.rotation = move_toward(body_sprite.rotation, angle_to_target, delta * 100)
 	move_and_collide(velocity * speed * delta)
 		
 func on_body_entered_detection_area(body: Node) -> void:
 	if current_target != main_target:
 		return
 		
-	print_debug("cockroach: found new target")
+	#print_debug("cockroach: found new target")
 	
 	current_target = body
 	
 func on_body_leaved_detection_area(body: Node) -> void:
-	print_debug("cockroach: lost target, heading to main target")
+	#print_debug("cockroach: lost target, heading to main target")
 	if current_target == body:
 		current_target = main_target
 		
 func notify_hit(damage_amount: float) -> void:
 	health -= damage_amount
 	healthbar.health = health
-	print_debug("cockroach: i've been shot!")
+	#print_debug("cockroach: i've been shot!")
 	if health <= 0:
 		queue_free()
 
@@ -55,6 +58,7 @@ func _on_hitbox_body_exited(body: Node2D):
 
 func attack_target():
 	if (current_target.has_method("notify_hit")):
+		print_debug("attacked target", damage_amount)
 		self.current_target.notify_hit(damage_amount)
 	
 

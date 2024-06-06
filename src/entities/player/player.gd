@@ -51,6 +51,10 @@ func _add_crop() -> void:
 		crop_quantity += 1
 		emit_signal("crop_changed")
 
+func add_crop() -> void:
+	crop_quantity += 1
+	emit_signal("crop_changed")
+
 func _add_turret() -> void:
 	var turret_instance = TURRENT_SCENE.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
 

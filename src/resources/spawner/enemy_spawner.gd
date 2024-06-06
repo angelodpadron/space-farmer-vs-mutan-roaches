@@ -2,8 +2,8 @@ extends Node2D
 
 @export var spawns: Array[SpawnInfo] = []
 
-@onready var player: Node = $%Player
-@onready var main_target: Node = $%Mouth
+@onready var player: Player = $%Player
+@onready var main_target: WorldMouth = $%Mouth
 @onready var timer: Timer = $SpawnTimer
 
 var time: int = 0
@@ -17,6 +17,7 @@ func handle_rumble() -> void:
 	timer.start(1.0)
 
 func spawn_enemies() -> void:
+	
 	time += 1
 	for spawn in spawns:
 		if time >= spawn.time_start and time <= spawn.time_end:

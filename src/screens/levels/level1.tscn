@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=10 format=3 uid="uid://m1ymcbgrrtb3"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://cft3stbkhsjjf" path="res://assets/textures/temp_background.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="3_p1pem"]
 [ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="4_88axw"]
+[ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/utils/seedpack.tscn" id="4_gffw3"]
+[ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/utils/planting_zone.tscn" id="5_ojurr"]
 [ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/resources/spawner/enemy_spawner.tscn" id="5_tvk8a"]
 [ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="6_8j2gq"]
 [ext_resource type="Script" path="res://src/resources/spawner/spawn_info.gd" id="7_iltni"]
@@ -38,25 +39,59 @@ offset_bottom = 420.0
 text = "MAIN MENU
 "
 
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -1
-offset = Vector2(-640, -360)
-transform = Transform2D(1, 0, 0, 1, -640, -360)
-follow_viewport_enabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Background"]
-texture = ExtResource("2")
-
 [node name="Entities" type="Node2D" parent="."]
-position = Vector2(579, 328)
 
 [node name="Mouth" parent="Entities" instance=ExtResource("4_88axw")]
 unique_name_in_owner = true
+position = Vector2(295, 117)
 
 [node name="Player" parent="Entities" instance=ExtResource("1")]
 unique_name_in_owner = true
+z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
+position_smoothing_enabled = true
+
+[node name="PlantingContainer" type="Node2D" parent="Entities"]
+
+[node name="PlantingZone" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 84)
+
+[node name="PlantingZone2" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 116)
+
+[node name="PlantingZone3" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 148)
+
+[node name="PlantingZone4" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 84)
+
+[node name="PlantingZone5" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 116)
+
+[node name="PlantingZone6" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 148)
+
+[node name="PlantingZone7" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 180)
+
+[node name="PlantingZone8" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 212)
+
+[node name="PlantingZone9" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(84, 244)
+
+[node name="PlantingZone10" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 180)
+
+[node name="PlantingZone11" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 212)
+
+[node name="PlantingZone12" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+position = Vector2(52, 244)
+
+[node name="Seedpack" parent="Entities" instance=ExtResource("4_gffw3")]
+position = Vector2(137, 24)
 
 [node name="EnemySpawner" parent="Entities" instance=ExtResource("5_tvk8a")]
 spawns = Array[ExtResource("7_iltni")]([SubResource("Resource_4gv68")])

@@ -14,14 +14,15 @@ radius = 213.338
 [node name="Turret" type="StaticBody2D"]
 light_mask = 8
 y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_fayp8")
 PROJECTILE_SCENE = ExtResource("2_w8bw8")
 
 [node name="HealthBar" parent="." instance=ExtResource("3_b4va5")]
-offset_left = -39.0
-offset_top = -82.0
-offset_right = 33.0
-offset_bottom = -78.0
+offset_left = -32.0
+offset_top = -96.0
+offset_right = 32.0
+offset_bottom = -92.0
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
