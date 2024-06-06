@@ -3,9 +3,11 @@ class_name Turret
 extends StaticBody2D
 
 @export var PROJECTILE_SCENE: PackedScene
-@onready var fire_position = $FirePosition
+@onready var fire_position = $%FirePosition
 @onready var fire_rate = $FireRate
 @onready var health_bar = $HealthBar
+@onready var audio_player = $AudioStreamPlayer
+@onready var sprite: Sprite2D = $Sprite
 
 var target: Cockroach
 var targets: Array[Cockroach]
@@ -14,9 +16,13 @@ var projectile_container: Node
 var health: float = 50
 
 func fire():
+	audio_player.play()
 	var projectile_instance: TurretProjectile = PROJECTILE_SCENE.instantiate()
 	var spawn_position = fire_position.global_position
 	var direction = (target.global_position - fire_position.global_position).normalized()
+	
+	#sprite.rotation = direction.angle()
+	
 	projectile_instance.set_starting_value(projectile_container, spawn_position, direction)
 	projectile_instance.delete_requested.connect(on_projectile_delete_request)
 
@@ -25,6 +31,11 @@ func initialize(container: Node, spawn_position: Vector2) -> void:
 	projectile_container = container
 	global_position = spawn_position
 	health_bar.init_health(health)
+	
+func _process(delta):
+	if target:
+		var direction = (target.global_position - fire_position.global_position).normalized()
+		sprite.rotation = lerp_angle(sprite.rotation, direction.angle(), 0.5)
 	
 func on_body_entered_detection_area(body: Cockroach) -> void:
 	self.targets.append(body)

@@ -10,6 +10,8 @@ class_name Cockroach
 @onready var healthbar: ProgressBar = $HealthBar
 @onready var body_sprite: Sprite2D = $Sprite2D
 
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
 var main_target: Node = null
 var current_target: Node = null
 var target_attacked: Node = null
@@ -41,6 +43,7 @@ func on_body_leaved_detection_area(body: Node) -> void:
 func notify_hit(damage_amount: float) -> void:
 	health -= damage_amount
 	healthbar.health = health
+	audio_player.play()
 	#print_debug("cockroach: i've been shot!")
 	if health <= 0:
 		queue_free()

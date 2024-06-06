@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c60c8bomjw5g"]
+[gd_scene load_steps=8 format=3 uid="uid://c60c8bomjw5g"]
 
 [ext_resource type="Texture2D" uid="uid://bh4rcoxegbqh0" path="res://assets/textures/player/astroFarmer.png" id="1"]
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://ccvea73egajyt" path="res://assets/audio/sfx/hit.wav" id="3_b4u2j"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 12.0
@@ -61,6 +62,10 @@ text = "Test"
 label_settings = SubResource("LabelSettings_xsdpl")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_b4u2j")
+bus = &"Player"
 
 [connection signal="area_entered" from="Interaction/Interaction Area" to="." method="_on_interaction_area_interactable_entered"]
 [connection signal="area_exited" from="Interaction/Interaction Area" to="." method="_on_interaction_area_interactable_exited"]

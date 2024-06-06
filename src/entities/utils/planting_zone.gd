@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @onready var grow_timer: Timer = $GrowTimer
 @onready var plant: AnimatedSprite2D = $Plant
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var plant_is_growing = false
 var collectable = false
@@ -34,6 +35,7 @@ func _on_plant_animation_finished():
 func _on_area_2d_body_entered(player: Player):
 	print_debug("planting_zone: player entered growing area")
 	if collectable:
+		audio_player.play()
 		player.add_crop()
 		collectable = false
 		plant.stop()

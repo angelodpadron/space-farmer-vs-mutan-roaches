@@ -160,7 +160,6 @@ sources/1 = SubResource("TileSetAtlasSource_ok8vv")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource("3_p1pem")]
-visible = false
 anchors_preset = -1
 anchor_right = 0.306424
 anchor_bottom = 0.0771605

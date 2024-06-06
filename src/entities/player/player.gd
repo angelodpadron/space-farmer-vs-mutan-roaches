@@ -14,6 +14,8 @@ signal crop_changed
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var interactables: Array = []
 
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
 # spawnables
 const CROP_SCENE: PackedScene = preload("res://src/resources/crop/crop.tscn")
 const TURRENT_SCENE: PackedScene = preload("res://src/resources/turret/turret.tscn")
@@ -67,7 +69,7 @@ func _on_interaction_area_interactable_exited(area: Crop) -> void:
 func notify_hit(damage_amount: float) -> void:
 	print_debug("player: ouch!", damage_amount)
 	health -= damage_amount
-	
+	audio_player.play()
 	if health <= 0:
 		print_debug("player: i'm dead")
 		emit_signal("health_changed", 0)

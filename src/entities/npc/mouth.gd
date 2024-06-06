@@ -22,6 +22,6 @@ func notify_hit(damage_amount: float) -> void:
 	
 func demand_food() -> void:
 	print_debug("mouth: feed me!")
-	#rumble.emit()
+	rumble.emit()
 	
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://uwe8qmpynkes"]
+[gd_scene load_steps=8 format=3 uid="uid://uwe8qmpynkes"]
 
 [ext_resource type="Script" path="res://src/resources/turret/turret.gd" id="1_fayp8"]
 [ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="1_ubau8"]
 [ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/resources/turret/turret_projectile.tscn" id="2_w8bw8"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="3_b4va5"]
+[ext_resource type="AudioStream" uid="uid://bbcwe61welqof" path="res://assets/audio/sfx/turret-fire.wav" id="5_kh1y3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tool7"]
 
@@ -24,17 +25,24 @@ offset_bottom = -78.0
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("1_ubau8")
 
+[node name="FirePosition" type="Marker2D" parent="Sprite"]
+unique_name_in_owner = true
+position = Vector2(12, 0)
+scale = Vector2(0.5, 0.5)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_tool7")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -42,8 +50,9 @@ collision_mask = 8
 position = Vector2(0, -34)
 shape = SubResource("CircleShape2D_cmckc")
 
-[node name="FirePosition" type="Marker2D" parent="."]
-position = Vector2(0, -39)
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_kh1y3")
+bus = &"Turret"
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
