@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhs876jqwqsvm"]
+
+[ext_resource type="Script" path="res://src/screens/menus/pause_menu.gd" id="1_s4ah1"]
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_6p63p"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s4ah1")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.321569)
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 350)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -150.0
+offset_right = 125.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_6p63p")
+theme_override_font_sizes/font_size = 80
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+process_priority = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6p63p")
+theme_override_font_sizes/font_size = 50
+text = "Resume"
+
+[node name="Options" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6p63p")
+theme_override_font_sizes/font_size = 50
+text = "Options"
+
+[node name="MainMenu" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6p63p")
+theme_override_font_sizes/font_size = 50
+text = "Main Menu"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

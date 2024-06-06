@@ -3,10 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
 [ext_resource type="Script" path="res://src/entities/enemies/cockroach.gd" id="1_pu8oi"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_r6vau"]
-[ext_resource type="Texture2D" uid="uid://btugyjykp6pwj" path="res://assets/textures/turret/turret.png" id="4_h7rjg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vlmvc"]
+load_path = "res://.godot/imported/turret.png-5b87eb8afe2dcf92c85685f6efae5aa4.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk0af"]
-radius = 6.08276
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7g1id"]
 radius = 108.0
@@ -46,13 +48,13 @@ texture = ExtResource("1_pnvhc")
 position = Vector2(4, -9)
 rotation = 0.434562
 scale = Vector2(0.01, 0.1)
-texture = ExtResource("4_h7rjg")
+texture = SubResource("CompressedTexture2D_vlmvc")
 
 [node name="Antenna2" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-5, -9)
 rotation = -0.411446
 scale = Vector2(0.01, 0.1)
-texture = ExtResource("4_h7rjg")
+texture = SubResource("CompressedTexture2D_vlmvc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

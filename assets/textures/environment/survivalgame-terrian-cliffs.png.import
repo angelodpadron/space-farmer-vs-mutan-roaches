@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dye16cxu54rb"
-path="res://.godot/imported/turret.png-5b87eb8afe2dcf92c85685f6efae5aa4.ctex"
+uid="uid://cpnuj74b1fk1p"
+path="res://.godot/imported/survivalgame-terrian-cliffs.png-63d0f725b7e734c30b5637b9f47dec21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/turret/turret.png"
-dest_files=["res://.godot/imported/turret.png-5b87eb8afe2dcf92c85685f6efae5aa4.ctex"]
+source_file="res://assets/textures/environment/survivalgame-terrian-cliffs.png"
+dest_files=["res://.godot/imported/survivalgame-terrian-cliffs.png-63d0f725b7e734c30b5637b9f47dec21.ctex"]
 
 [params]
 

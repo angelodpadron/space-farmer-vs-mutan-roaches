@@ -1,39 +1,36 @@
 [gd_scene load_steps=7 format=3 uid="uid://uwe8qmpynkes"]
 
 [ext_resource type="Script" path="res://src/resources/turret/turret.gd" id="1_fayp8"]
-[ext_resource type="Texture2D" uid="uid://btugyjykp6pwj" path="res://assets/textures/turret/turret.png" id="1_ubau8"]
+[ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="1_ubau8"]
 [ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/resources/turret/turret_projectile.tscn" id="2_w8bw8"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="3_b4va5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s30xi"]
-size = Vector2(30, 20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_tool7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmckc"]
 radius = 213.338
 
 [node name="Turret" type="StaticBody2D"]
 light_mask = 8
-y_sort_enabled = true
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_fayp8")
 PROJECTILE_SCENE = ExtResource("2_w8bw8")
 
 [node name="HealthBar" parent="." instance=ExtResource("3_b4va5")]
-offset_left = -32.0
-offset_top = -96.0
-offset_right = 32.0
-offset_bottom = -92.0
+offset_left = -39.0
+offset_top = -82.0
+offset_right = 33.0
+offset_bottom = -78.0
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -34)
+scale = Vector2(2, 2)
 texture = ExtResource("1_ubau8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -13)
-shape = SubResource("RectangleShape2D_s30xi")
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_tool7")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
