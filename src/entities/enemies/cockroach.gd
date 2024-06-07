@@ -11,6 +11,8 @@ class_name Cockroach
 @onready var body_sprite: Sprite2D = $Sprite2D
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var shader_material = $Sprite2D.material
 
 var main_target: Node = null
 var current_target: Node = null
@@ -41,6 +43,9 @@ func on_body_leaved_detection_area(body: Node) -> void:
 		current_target = main_target
 		
 func notify_hit(damage_amount: float) -> void:
+	
+	animation_player.play("hit")
+	
 	health -= damage_amount
 	healthbar.health = health
 	audio_player.play()
@@ -63,6 +68,12 @@ func attack_target():
 	if (current_target.has_method("notify_hit")):
 		print_debug("attacked target", damage_amount)
 		self.current_target.notify_hit(damage_amount)
+		
+func enable_hit_flash() -> void:
+	shader_material.set_shader_parameter("active", true)
+	
+func disable_hit_flash() -> void:
+	shader_material.set_shader_parameter("active", false)
 	
 
 

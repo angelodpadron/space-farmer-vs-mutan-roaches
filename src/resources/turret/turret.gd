@@ -21,8 +21,6 @@ func fire():
 	var spawn_position = fire_position.global_position
 	var direction = (target.global_position - fire_position.global_position).normalized()
 	
-	#sprite.rotation = direction.angle()
-	
 	projectile_instance.set_starting_value(projectile_container, spawn_position, direction)
 	projectile_instance.delete_requested.connect(on_projectile_delete_request)
 
@@ -35,7 +33,7 @@ func initialize(container: Node, spawn_position: Vector2) -> void:
 func _process(delta):
 	if target:
 		var direction = (target.global_position - fire_position.global_position).normalized()
-		sprite.rotation = lerp_angle(sprite.rotation, direction.angle(), 0.5)
+		sprite.rotation = lerp_angle(sprite.rotation, direction.angle(), 0.1)
 	
 func on_body_entered_detection_area(body: Cockroach) -> void:
 	self.targets.append(body)

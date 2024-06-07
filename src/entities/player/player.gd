@@ -14,7 +14,11 @@ signal crop_changed
 @onready var forward: Vector2 = Vector2.DOWN
 @onready var hitbox: CollisionShape2D = $Hitbox
 
+@onready var shader_material = $Sprite2D.material
+
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _physics_process(_delta) -> void:
 	var horizontal_dir: int = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -47,7 +51,9 @@ func _on_interaction_area_interactable_exited(area: Node) -> void:
 	pass
 	
 func notify_hit(damage_amount: float) -> void:
-	print_debug("player: ouch!", damage_amount)
+	
+	animation_player.play("hit")
+	
 	health -= damage_amount
 	audio_player.play()
 	if health <= 0:
@@ -62,3 +68,10 @@ func handle_dead() -> void:
 	collision_layer = 0
 	set_physics_process(false)
 	hide()
+	
+func enable_hit_flash() -> void:
+	shader_material.set_shader_parameter("active", true)
+	
+func disable_hit_flash() -> void:
+	shader_material.set_shader_parameter("active", false)
+	
