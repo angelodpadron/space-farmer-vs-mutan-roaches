@@ -24,11 +24,12 @@ func _on_grow_timer_timeout():
 func _on_area_2d_area_entered(area):
 	if not plant_is_growing and not collectable:
 		grow_timer.start()
+		plant_is_growing=true
 
 
 func _on_plant_animation_finished():
-	plant_is_growing = false
 	collectable = true
+	plant_is_growing = false
 	print_debug("planting_zone: plan finished grow")
 
 

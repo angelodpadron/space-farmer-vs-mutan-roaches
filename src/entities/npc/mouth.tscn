@@ -1,23 +1,200 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtswk33m7i1du"]
+[gd_scene load_steps=17 format=3 uid="uid://dtswk33m7i1du"]
 
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_1k1hb"]
 [ext_resource type="Script" path="res://src/entities/npc/mouth.gd" id="1_4rw1f"]
-[ext_resource type="Texture2D" uid="uid://jhf52clmg4fs" path="res://assets/textures/planet/mouth.png" id="2_1erhd"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_5h5kl"]
+[ext_resource type="Texture2D" uid="uid://b3wu3u31serp1" path="res://assets/textures/planet/mouth frames/mouth_frame_1.png" id="4_btp17"]
+[ext_resource type="Texture2D" uid="uid://caudsktyj7knh" path="res://assets/textures/planet/mouth frames/mouth_frame_4.png" id="5_bypng"]
+[ext_resource type="Texture2D" uid="uid://cirl0bprclbai" path="res://assets/textures/planet/mouth frames/mouth_frame_2.png" id="6_tm3vg"]
+[ext_resource type="Texture2D" uid="uid://ccsph5oeorflg" path="res://assets/textures/planet/mouth frames/mouth_frame_3.png" id="7_cut2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ingb1"]
 size = Vector2(31, 16)
+
+[sub_resource type="Animation" id="Animation_xda43"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_btp17")]
+}
+
+[sub_resource type="Animation" id="Animation_lba4m"]
+resource_name = "chewing"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 0.8), Vector2(1, 1), Vector2(0.8, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_bypng")]
+}
+
+[sub_resource type="Animation" id="Animation_5h43c"]
+resource_name = "eating"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_btp17"), ExtResource("6_tm3vg"), ExtResource("7_cut2p"), ExtResource("5_bypng")]
+}
+
+[sub_resource type="Animation" id="Animation_7n0sc"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.01), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_btp17")]
+}
+
+[sub_resource type="Animation" id="Animation_c3flf"]
+resource_name = "rumble"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_btp17"), ExtResource("6_tm3vg"), ExtResource("7_cut2p"), ExtResource("5_bypng"), ExtResource("7_cut2p"), ExtResource("6_tm3vg"), ExtResource("4_btp17")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -0.2), Vector2(0, 0.4), Vector2(0, -0.3), Vector2(0, -0.6), Vector2(0, 0.2), Vector2(0, 0), Vector2(0, -0.2), Vector2(0, 0.4), Vector2(0, -0.3), Vector2(0, -0.6), Vector2(0, 0.2), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_56l6r"]
+resource_name = "talking"
+length = 0.2
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_btp17"), ExtResource("6_tm3vg"), ExtResource("7_cut2p"), ExtResource("5_bypng")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_no18u"]
+_data = {
+"RESET": SubResource("Animation_xda43"),
+"chewing": SubResource("Animation_lba4m"),
+"eating": SubResource("Animation_5h43c"),
+"idle": SubResource("Animation_7n0sc"),
+"rumble": SubResource("Animation_c3flf"),
+"talking": SubResource("Animation_56l6r")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uti53"]
+radius = 91.444
 
 [node name="Mouth" type="StaticBody2D"]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_4rw1f")
+health = 300.0
 
 [node name="HealthBar" parent="." instance=ExtResource("2_5h5kl")]
 offset_left = -32.0
-offset_top = -41.0
+offset_top = -97.0
 offset_right = 32.0
-offset_bottom = -30.0
+offset_bottom = -86.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
@@ -32,9 +209,28 @@ theme_override_fonts/font = ExtResource("1_1k1hb")
 text = "Mouth"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_1erhd")
+texture = ExtResource("4_btp17")
 
 [node name="RumbleTimer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="MouthAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_no18u")
+}
+
+[node name="EatingTime" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uti53")
+
+[connection signal="animation_finished" from="MouthAnimationPlayer" to="." method="_on_mouth_animation_player_animation_finished"]
+[connection signal="timeout" from="EatingTime" to="." method="_on_eating_time_timeout"]

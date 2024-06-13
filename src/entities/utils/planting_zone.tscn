@@ -84,6 +84,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_614eq")
+volume_db = -17.0
 bus = &"Notification"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -20,6 +20,8 @@ signal crop_changed
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var interactables:Array= []
+
 func _physics_process(_delta) -> void:
 	var horizontal_dir: int = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	var vertical_dir: int = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
@@ -36,7 +38,11 @@ func _process(_delta) -> void:
 		_add_turret()
 		crop_quantity -= 1
 		emit_signal("crop_changed")	
-	
+	if Input.is_action_just_pressed("interact") and !interactables.is_empty() and crop_quantity>0:
+		interactables[0].interact
+		crop_quantity-=1
+		emit_signal("crop_change")
+
 func add_crop() -> void:
 	crop_quantity += 1
 	emit_signal("crop_changed")
@@ -45,10 +51,12 @@ func _add_turret() -> void:
 	var turret_instance = turret_scene.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
 
 func _on_interaction_area_interactable_entered(area: Node) -> void:
-	pass
+	if area.get_parent().get_class()=="WorldMouth":
+		print_debug("interactable entered")#continuar desde aqui
+		interactables.insert(0,area.get_parent())
 
 func _on_interaction_area_interactable_exited(area: Node) -> void:
-	pass
+	interactables.erase(area.get_parent())
 	
 func notify_hit(damage_amount: float) -> void:
 	

@@ -9,19 +9,19 @@ extends Node2D
 var time: int = 0
 
 func _ready():
-	timer.timeout.connect(_on_spawn_timer_timeout)
 	main_target.rumble.connect(handle_rumble)
 	
-func handle_rumble() -> void:
+func handle_rumble(rumble_count:int) -> void:
 	print_debug("spawner: rumble detected, spawning enemies!")
-	timer.start(1.0)
+	spawn_enemies(rumble_count)
 
-func spawn_enemies() -> void:
+func spawn_enemies(rumble_count:int) -> void:
 	
 	time += 1
 	for spawn in spawns:
 		if time >= spawn.time_start and time <= spawn.time_end:
 			
+			#if inecesario, chequear
 			if spawn.spawn_delay_count < spawn.spawn_delay:
 				spawn.spawn_delay_count += 1
 				return
@@ -30,7 +30,7 @@ func spawn_enemies() -> void:
 			
 			var new_enemy = load(str(spawn.enemy.resource_path))
 			
-			for count in spawn.enemy_count:
+			for count in (spawn.enemy_count*rumble_count):
 				var enemy_spawn = new_enemy.instantiate()
 				enemy_spawn.global_position = get_random_position()
 				add_child(enemy_spawn)
@@ -64,6 +64,3 @@ func get_random_position():
 	var y_spawn = randf_range(spawn_pos1.y, spawn_pos2.y)
 	
 	return Vector2(x_spawn, y_spawn)
-
-func _on_spawn_timer_timeout():
-	spawn_enemies()

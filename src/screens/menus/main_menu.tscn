@@ -45,6 +45,7 @@ Mutan Roaches"
 
 [node name="Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
@@ -80,6 +81,7 @@ theme_override_font_sizes/font_size = 16
 text = "Ver. 0.0.1"
 
 [node name="Control" parent="." instance=ExtResource("4_6xg7n")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/LeftContainer/Buttons/NewGame" to="." method="_on_new_game_pressed"]
