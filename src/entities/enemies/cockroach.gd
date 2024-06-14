@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Cockroach
 
+
 @export var speed: float = 100
 @export var health: float = 15
 @export var damage_amount: float = 1

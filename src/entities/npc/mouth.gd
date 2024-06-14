@@ -5,11 +5,14 @@ signal rumble
 
 @export var health: float = 10000
 @export var first_wave_wait_time:int
+@export var max_spawn_count:int=10
+@export var feed_add_time:int=3
 
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var rumble_timer: Timer = $RumbleTimer
 @onready var mouth_animation_player = $MouthAnimationPlayer
 @onready var eating_time = $EatingTime
+
 
 var rumble_count:int=1
 
@@ -31,7 +34,7 @@ func demand_food() -> void:
 	rumble_count*=2
 	rumble.emit(rumble_count)
 	_play_animation("rumble")
-	rumble_timer.start(min(first_wave_wait_time/rumble_count,10))
+	rumble_timer.start(min(first_wave_wait_time/rumble_count,max_spawn_count))
 
 func _play_animation(anim:String):
 	mouth_animation_player.play(anim)
@@ -44,7 +47,7 @@ func _on_mouth_animation_player_animation_finished(anim_name):
 func feed():
 	rumble_timer.stop()
 	_play_animation("chewing")
-	eating_time.start(eating_time.time_left+1)
+	eating_time.start(eating_time.time_left+feed_add_time)
 
 func _on_eating_time_timeout():
 	eating_time.stop()

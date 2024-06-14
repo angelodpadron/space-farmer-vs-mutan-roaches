@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtswk33m7i1du"]
+[gd_scene load_steps=18 format=3 uid="uid://dtswk33m7i1du"]
 
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_1k1hb"]
 [ext_resource type="Script" path="res://src/entities/npc/mouth.gd" id="1_4rw1f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://caudsktyj7knh" path="res://assets/textures/planet/mouth frames/mouth_frame_4.png" id="5_bypng"]
 [ext_resource type="Texture2D" uid="uid://cirl0bprclbai" path="res://assets/textures/planet/mouth frames/mouth_frame_2.png" id="6_tm3vg"]
 [ext_resource type="Texture2D" uid="uid://ccsph5oeorflg" path="res://assets/textures/planet/mouth frames/mouth_frame_3.png" id="7_cut2p"]
+[ext_resource type="Script" path="res://src/entities/npc/InteractableArea.gd" id="8_hi373"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ingb1"]
 size = Vector2(31, 16)
@@ -224,12 +225,14 @@ libraries = {
 [node name="EatingTime" type="Timer" parent="."]
 wait_time = 3.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="InteractableArea" type="Area2D" parent="." node_paths=PackedStringArray("interaction_delegate")]
 collision_layer = 32768
 collision_mask = 2
 monitoring = false
+script = ExtResource("8_hi373")
+interaction_delegate = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
 shape = SubResource("CircleShape2D_uti53")
 
 [connection signal="animation_finished" from="MouthAnimationPlayer" to="." method="_on_mouth_animation_player_animation_finished"]

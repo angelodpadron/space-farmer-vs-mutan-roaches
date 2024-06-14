@@ -38,10 +38,10 @@ func _process(_delta) -> void:
 		_add_turret()
 		crop_quantity -= 1
 		emit_signal("crop_changed")	
-	if Input.is_action_just_pressed("interact") and !interactables.is_empty() and crop_quantity>0:
-		interactables[0].interact
-		crop_quantity-=1
-		emit_signal("crop_change")
+	if Input.is_action_just_pressed("interact") and !interactables.is_empty() and crop_quantity>=2:
+		interactables[0].interact(self)
+		crop_quantity-=2
+		emit_signal("crop_changed")
 
 func add_crop() -> void:
 	crop_quantity += 1
@@ -50,13 +50,12 @@ func add_crop() -> void:
 func _add_turret() -> void:
 	var turret_instance = turret_scene.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
 
-func _on_interaction_area_interactable_entered(area: Node) -> void:
-	if area.get_parent().get_class()=="WorldMouth":
-		print_debug("interactable entered")#continuar desde aqui
-		interactables.insert(0,area.get_parent())
+func _on_interaction_area_interactable_entered(area: Interactable) -> void:
+	print_debug("interactable entered")#continuar desde aqui
+	interactables.insert(0,area)
 
-func _on_interaction_area_interactable_exited(area: Node) -> void:
-	interactables.erase(area.get_parent())
+func _on_interaction_area_interactable_exited(area: Interactable) -> void:
+	interactables.erase(area)
 	
 func notify_hit(damage_amount: float) -> void:
 	
