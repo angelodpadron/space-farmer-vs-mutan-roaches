@@ -7,6 +7,7 @@ extends StaticBody2D
 @onready var health_bar = $HealthBar
 @onready var audio_player = $AudioStreamPlayer
 @onready var sprite: Sprite2D = $Sprite
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var target: Cockroach
 var targets: Array[Cockroach]
@@ -55,6 +56,7 @@ func on_projectile_delete_request(projectile: TurretProjectile):
 	projectile.call_deferred("queue_free")
 	
 func notify_hit(damage_amount: float) -> void:
+	animation_player.play("hit")
 	health -= damage_amount
 	health_bar.health = health
 	
@@ -64,3 +66,9 @@ func notify_hit(damage_amount: float) -> void:
 
 func _on_fire_rate_timeout():
 	fire()
+	
+func enable_hit_flash() -> void:
+	sprite.material.set_shader_parameter("active", true)
+	
+func disable_hit_flash() -> void:
+	sprite.material.set_shader_parameter("active", false)
