@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=19 format=3 uid="uid://m1ymcbgrrtb3"]
 
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/pause_menu.tscn" id="2_ajmyj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/resources/spawner/spawn_info.gd" id="7_iltni"]
 [ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="9_72pik"]
 [ext_resource type="Texture2D" uid="uid://cpnuj74b1fk1p" path="res://assets/textures/environment/survivalgame-terrian-cliffs.png" id="10_63wui"]
+[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/ship.tscn" id="11_0c42r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgp77"]
 resource_local_to_scene = true
@@ -178,17 +179,20 @@ player = NodePath("../../Entities/Player")
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_ajmyj")]
+visible = false
 
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Mouth" parent="Entities" instance=ExtResource("4_88axw")]
 unique_name_in_owner = true
-position = Vector2(295, 117)
+position = Vector2(797, 298)
+scale = Vector2(3, 3)
 
 [node name="Player" parent="Entities" instance=ExtResource("1")]
 unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_mgp77")
+collision_mask = 160
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 position_smoothing_enabled = true
@@ -245,6 +249,10 @@ position = Vector2(137, 24)
 
 [node name="EnemySpawner" parent="Entities" instance=ExtResource("5_tvk8a")]
 spawns = Array[ExtResource("7_iltni")]([SubResource("Resource_4gv68")])
+
+[node name="Ship" parent="Entities" instance=ExtResource("11_0c42r")]
+position = Vector2(-293, -66.9999)
+scale = Vector2(5, 5)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_830lb")

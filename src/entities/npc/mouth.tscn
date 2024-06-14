@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dtswk33m7i1du"]
+[gd_scene load_steps=19 format=3 uid="uid://dtswk33m7i1du"]
 
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_1k1hb"]
 [ext_resource type="Script" path="res://src/entities/npc/mouth.gd" id="1_4rw1f"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cirl0bprclbai" path="res://assets/textures/planet/mouth frames/mouth_frame_2.png" id="6_tm3vg"]
 [ext_resource type="Texture2D" uid="uid://ccsph5oeorflg" path="res://assets/textures/planet/mouth frames/mouth_frame_3.png" id="7_cut2p"]
 [ext_resource type="Script" path="res://src/entities/npc/InteractableArea.gd" id="8_hi373"]
+[ext_resource type="AudioStream" uid="uid://bgejynfnanl7e" path="res://assets/audio/sfx/scream.wav" id="9_n3431"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ingb1"]
-size = Vector2(31, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8kx7b"]
+radius = 47.6681
 
 [sub_resource type="Animation" id="Animation_xda43"]
 length = 0.001
@@ -153,6 +154,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -0.2), Vector2(0, 0.4), Vector2(0, -0.3), Vector2(0, -0.6), Vector2(0, 0.2), Vector2(0, 0), Vector2(0, -0.2), Vector2(0, 0.4), Vector2(0, -0.3), Vector2(0, -0.6), Vector2(0, 0.2), Vector2(0, 0)]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_56l6r"]
 resource_name = "talking"
@@ -186,6 +201,7 @@ _data = {
 radius = 91.444
 
 [node name="Mouth" type="StaticBody2D"]
+scale = Vector2(2, 2)
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_4rw1f")
@@ -199,7 +215,7 @@ offset_bottom = -86.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_ingb1")
+shape = SubResource("CircleShape2D_8kx7b")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -22.0
@@ -234,6 +250,10 @@ interaction_delegate = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
 shape = SubResource("CircleShape2D_uti53")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_n3431")
+bus = &"Planet"
 
 [connection signal="animation_finished" from="MouthAnimationPlayer" to="." method="_on_mouth_animation_player_animation_finished"]
 [connection signal="timeout" from="EatingTime" to="." method="_on_eating_time_timeout"]

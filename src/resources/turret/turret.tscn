@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="1_ubau8"]
 [ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/resources/turret/turret_projectile.tscn" id="2_w8bw8"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="3_b4va5"]
-[ext_resource type="AudioStream" uid="uid://bbcwe61welqof" path="res://assets/audio/sfx/turret-fire.wav" id="5_kh1y3"]
+[ext_resource type="AudioStream" uid="uid://hgf3thono5bk" path="res://assets/audio/sfx/shot.wav" id="5_dwley"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tool7"]
 
@@ -51,8 +51,8 @@ position = Vector2(0, -34)
 shape = SubResource("CircleShape2D_cmckc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_kh1y3")
-bus = &"Turret"
+stream = ExtResource("5_dwley")
+bus = &"Tools"
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
