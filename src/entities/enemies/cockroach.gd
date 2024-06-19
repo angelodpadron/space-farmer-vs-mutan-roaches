@@ -2,10 +2,9 @@ extends CharacterBody2D
 
 class_name Cockroach
 
-
 @export var speed: float = 100
 @export var health: float = 15
-@export var damage_amount: float = 1
+@export var damage_amount: int = 1
 
 @onready var attack_rate: Timer = $AttackRate
 @onready var healthbar: ProgressBar = $HealthBar
@@ -34,12 +33,9 @@ func on_body_entered_detection_area(body: Node) -> void:
 	if current_target != main_target:
 		return
 		
-	#print_debug("cockroach: found new target")
-	
 	current_target = body
 	
 func on_body_leaved_detection_area(body: Node) -> void:
-	#print_debug("cockroach: lost target, heading to main target")
 	if current_target == body:
 		current_target = main_target
 		
@@ -50,7 +46,6 @@ func notify_hit(damage_amount: float) -> void:
 	health -= damage_amount
 	healthbar.health = health
 	audio_player.play()
-	#print_debug("cockroach: i've been shot!")
 	if health <= 0:
 		queue_free()
 
@@ -67,7 +62,6 @@ func _on_hitbox_body_exited(body: Node2D):
 
 func attack_target():
 	if (current_target.has_method("notify_hit")):
-		print_debug("attacked target", damage_amount)
 		self.current_target.notify_hit(damage_amount)
 		
 func enable_hit_flash() -> void:

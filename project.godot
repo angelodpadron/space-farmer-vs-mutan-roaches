@@ -15,6 +15,10 @@ run/main_scene="res://src/screens/menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerState="*res://src/scripts/PlayerState.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -22,6 +26,8 @@ window/stretch/mode="canvas_items"
 [editor]
 
 movie_writer/movie_file="C:/Dev/unq/intro-dv/boss/space-farmer-vs-mutan-roaches/debug/sample.avi"
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [input]
 

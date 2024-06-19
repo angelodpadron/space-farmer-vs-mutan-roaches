@@ -29,7 +29,7 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwj7i"]
-radius = 9.0
+radius = 15.0
 
 [sub_resource type="Animation" id="Animation_acuxw"]
 resource_name = "hit"
@@ -67,6 +67,7 @@ slide_on_ceiling = false
 script = ExtResource("1_pu8oi")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_r6vau")]
+visible = false
 offset_left = -16.0
 offset_top = -20.0
 offset_right = 16.0
@@ -95,9 +96,8 @@ visible = false
 shape = SubResource("CircleShape2D_yk0af")
 
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 35
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_7g1id")
@@ -113,7 +113,7 @@ label_settings = SubResource("LabelSettings_gslri")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 35
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_qwj7i")

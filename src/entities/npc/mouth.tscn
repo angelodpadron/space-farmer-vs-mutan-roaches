@@ -208,6 +208,7 @@ script = ExtResource("1_4rw1f")
 health = 300.0
 
 [node name="HealthBar" parent="." instance=ExtResource("2_5h5kl")]
+visible = false
 offset_left = -32.0
 offset_top = -97.0
 offset_right = 32.0

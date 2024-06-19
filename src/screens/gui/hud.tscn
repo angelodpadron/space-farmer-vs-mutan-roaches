@@ -57,6 +57,7 @@ custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer/Counter/Counters/Background"]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5

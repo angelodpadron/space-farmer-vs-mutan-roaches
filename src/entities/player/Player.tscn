@@ -1,10 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c60c8bomjw5g"]
+[gd_scene load_steps=18 format=3 uid="uid://c60c8bomjw5g"]
 
 [ext_resource type="Texture2D" uid="uid://bh4rcoxegbqh0" path="res://assets/textures/player/astroFarmer.png" id="1"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="1_auksh"]
 [ext_resource type="Script" path="res://src/entities/player/player.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://uwe8qmpynkes" path="res://src/resources/turret/turret.tscn" id="2_i8jcp"]
+[ext_resource type="PackedScene" uid="uid://uwe8qmpynkes" path="res://src/entities/turret/turret.tscn" id="2_i8jcp"]
 [ext_resource type="AudioStream" uid="uid://ccvea73egajyt" path="res://assets/audio/sfx/hit.wav" id="3_b4u2j"]
+[ext_resource type="Script" path="res://src/entities/player/StateMachine.gd" id="4_nxo1m"]
+[ext_resource type="Script" path="res://src/entities/player/states/Idle.gd" id="5_0pd5h"]
+[ext_resource type="Script" path="res://src/entities/player/states/Walk.gd" id="6_118yv"]
+[ext_resource type="Script" path="res://src/entities/player/states/Dead.gd" id="7_ec8x0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4qwan"]
 resource_local_to_scene = true
@@ -63,8 +67,24 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("2")
-health = 30.0
 turret_scene = ExtResource("2_i8jcp")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_nxo1m")
+character_path = NodePath("..")
+start_state = NodePath("Idle")
+states = Array[NodePath]([NodePath("Idle"), NodePath("Walk")])
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_0pd5h")
+state_id = "idle"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("6_118yv")
+state_id = "walk"
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("7_ec8x0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_hr8f8")
@@ -114,5 +134,6 @@ libraries = {
 "": SubResource("AnimationLibrary_bd24q")
 }
 
+[connection signal="hit" from="." to="StateMachine" method="notify_hit"]
 [connection signal="area_entered" from="Interaction/Interaction Area" to="." method="_on_interaction_area_interactable_entered"]
 [connection signal="area_exited" from="Interaction/Interaction Area" to="." method="_on_interaction_area_interactable_exited"]
