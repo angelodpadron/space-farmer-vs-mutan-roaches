@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dix62shbkvm7i"]
 
 [ext_resource type="Texture2D" uid="uid://ccylp330sr4p7" path="res://assets/textures/temp-tilesheet.png" id="1_6860o"]
-[ext_resource type="Script" path="res://src/entities/utils/planting_zone.gd" id="1_bkc3s"]
+[ext_resource type="Script" path="res://src/entities/crop/PlantingZone.gd" id="1_bkc3s"]
 [ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="2_iiwno"]
 [ext_resource type="AudioStream" uid="uid://dfxd0pj06r0q6" path="res://assets/audio/sfx/mechanical-crate-pick-up.wav" id="4_614eq"]
 

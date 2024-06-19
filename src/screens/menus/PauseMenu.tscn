@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhs876jqwqsvm"]
 
-[ext_resource type="Script" path="res://src/screens/menus/pause_menu.gd" id="1_1na7e"]
+[ext_resource type="Script" path="res://src/screens/menus/PauseMenu.gd" id="1_1na7e"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_6p63p"]
-[ext_resource type="PackedScene" uid="uid://birrju5jro8vn" path="res://src/screens/menus/options.tscn" id="3_vh0xe"]
+[ext_resource type="PackedScene" uid="uid://birrju5jro8vn" path="res://src/screens/menus/Options.tscn" id="3_vh0xe"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3

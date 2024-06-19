@@ -24,6 +24,8 @@ var vertical_dir: int = 0
 
 var interactables: Array = []
 
+var dead: bool = false
+
 
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("place_turret") and PlayerState.crop_amount > 0:
@@ -52,9 +54,9 @@ func notify_hit(damage_amount: int) -> void:
 	hit.emit(damage_amount)
 	
 	
-func handle_dead() -> void:
-	collision_layer = 0
+func _handle_dead() -> void:
 	set_physics_process(false)
+	collision_layer = 0
 	hide()
 	
 func enable_hit_flash() -> void:
@@ -83,6 +85,10 @@ func _apply_movement() -> void:
 func _handle_hit(damage_amount: int) -> void:
 	PlayerState.decrease_health(damage_amount)
 	health_changed.emit()
+	
+	if PlayerState.health <= 0:
+		dead = true
+	
 	animation_player.play("hit")	
 	audio_player.play()
 	

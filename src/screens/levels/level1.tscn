@@ -1,34 +1,34 @@
 [gd_scene load_steps=19 format=3 uid="uid://m1ymcbgrrtb3"]
 
-[ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/pause_menu.tscn" id="2_ajmyj"]
-[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="3_p1pem"]
-[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="4_88axw"]
-[ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/utils/seedpack.tscn" id="4_gffw3"]
-[ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="5_h7ib1"]
-[ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/utils/planting_zone.tscn" id="5_ojurr"]
-[ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/entities/spawner/enemy_spawner.tscn" id="5_tvk8a"]
-[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="6_8j2gq"]
-[ext_resource type="Script" path="res://src/entities/spawner/spawn_info.gd" id="7_iltni"]
-[ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="9_72pik"]
-[ext_resource type="Texture2D" uid="uid://cpnuj74b1fk1p" path="res://assets/textures/environment/survivalgame-terrian-cliffs.png" id="10_63wui"]
-[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/ship.tscn" id="11_0c42r"]
+[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/Hud.tscn" id="1_7fwt3"]
+[ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/PauseMenu.tscn" id="2_4nkqr"]
+[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/Mouth.tscn" id="3_7nm61"]
+[ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="4_h6x86"]
+[ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="5_4glke"]
+[ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/crop/PlantingZone.tscn" id="6_ymcn3"]
+[ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/crop/Seedpack.tscn" id="7_s28t5"]
+[ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/entities/spawner/EnemySpawner.tscn" id="8_mf81d"]
+[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/Cockroach.tscn" id="9_6okg2"]
+[ext_resource type="Script" path="res://src/entities/spawner/SpawnInfo.gd" id="10_4ubp3"]
+[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/Ship.tscn" id="11_p76ss"]
+[ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="12_akw5v"]
+[ext_resource type="Texture2D" uid="uid://cpnuj74b1fk1p" path="res://assets/textures/environment/survivalgame-terrian-cliffs.png" id="13_ps66t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgp77"]
 resource_local_to_scene = true
-shader = ExtResource("5_h7ib1")
+shader = ExtResource("5_4glke")
 shader_parameter/active = false
 
 [sub_resource type="Resource" id="Resource_4gv68"]
-script = ExtResource("7_iltni")
-enemy = ExtResource("6_8j2gq")
+script = ExtResource("10_4ubp3")
+enemy = ExtResource("9_6okg2")
 enemy_count = 1
 time_start = 0
 time_end = 60
 spawn_delay = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gxq32"]
-texture = ExtResource("9_72pik")
+texture = ExtResource("12_akw5v")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
 1:0/0 = 0
@@ -113,7 +113,7 @@ texture_region_size = Vector2i(40, 40)
 18:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ok8vv"]
-texture = ExtResource("10_63wui")
+texture = ExtResource("13_ps66t")
 texture_region_size = Vector2i(40, 40)
 0:0/0 = 0
 1:0/0 = 0
@@ -167,7 +167,7 @@ sources/1 = SubResource("TileSetAtlasSource_ok8vv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="CanvasLayer" instance=ExtResource("3_p1pem")]
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("1_7fwt3")]
 anchors_preset = -1
 anchor_right = 0.306424
 anchor_bottom = 0.0771605
@@ -177,17 +177,17 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_ajmyj")]
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_4nkqr")]
 visible = false
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Mouth" parent="Entities" instance=ExtResource("4_88axw")]
+[node name="Mouth" parent="Entities" instance=ExtResource("3_7nm61")]
 unique_name_in_owner = true
 position = Vector2(797, 298)
 scale = Vector2(3, 3)
 
-[node name="Player" parent="Entities" instance=ExtResource("1")]
+[node name="Player" parent="Entities" instance=ExtResource("4_h6x86")]
 unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_mgp77")
@@ -198,58 +198,58 @@ position_smoothing_enabled = true
 
 [node name="PlantingContainer" type="Node2D" parent="Entities"]
 
-[node name="PlantingZone" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-54, 140)
 
-[node name="PlantingZone2" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone2" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-54, 178)
 
-[node name="PlantingZone3" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone3" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-54, 220)
 
-[node name="PlantingZone4" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone4" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-18, 140)
 
-[node name="PlantingZone5" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone5" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-18, 178)
 
-[node name="PlantingZone6" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone6" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-18, 220)
 
-[node name="PlantingZone7" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone7" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(17, 140)
 
-[node name="PlantingZone8" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone8" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(17, 178)
 
-[node name="PlantingZone9" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone9" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(17, 220)
 
-[node name="PlantingZone10" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone10" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-54, 261)
 
-[node name="PlantingZone11" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone11" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-54, 303)
 
-[node name="PlantingZone12" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone12" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-18, 261)
 
-[node name="PlantingZone13" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone13" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(-18, 303)
 
-[node name="PlantingZone14" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone14" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(17, 261)
 
-[node name="PlantingZone15" parent="Entities/PlantingContainer" instance=ExtResource("5_ojurr")]
+[node name="PlantingZone15" parent="Entities/PlantingContainer" instance=ExtResource("6_ymcn3")]
 position = Vector2(17, 303)
 
-[node name="Seedpack" parent="Entities" instance=ExtResource("4_gffw3")]
+[node name="Seedpack" parent="Entities" instance=ExtResource("7_s28t5")]
 position = Vector2(137, 24)
 
-[node name="EnemySpawner" parent="Entities" instance=ExtResource("5_tvk8a")]
-spawns = Array[ExtResource("7_iltni")]([SubResource("Resource_4gv68")])
+[node name="EnemySpawner" parent="Entities" instance=ExtResource("8_mf81d")]
+spawns = Array[ExtResource("10_4ubp3")]([SubResource("Resource_4gv68")])
 
-[node name="Ship" parent="Entities" instance=ExtResource("11_0c42r")]
+[node name="Ship" parent="Entities" instance=ExtResource("11_p76ss")]
 position = Vector2(-293, -66.9999)
 scale = Vector2(5, 5)
 

@@ -21,3 +21,5 @@ func handle_event(event: String, value = null) -> void:
 	match event:
 		"hit":
 			character._handle_hit(value)
+			if character.dead:
+				finished.emit("dead")

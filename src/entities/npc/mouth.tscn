@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://dtswk33m7i1du"]
 
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_1k1hb"]
-[ext_resource type="Script" path="res://src/entities/npc/mouth.gd" id="1_4rw1f"]
-[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_5h5kl"]
+[ext_resource type="Script" path="res://src/entities/npc/Mouth.gd" id="1_4rw1f"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="2_5h5kl"]
 [ext_resource type="Texture2D" uid="uid://b3wu3u31serp1" path="res://assets/textures/planet/mouth frames/mouth_frame_1.png" id="4_btp17"]
 [ext_resource type="Texture2D" uid="uid://caudsktyj7knh" path="res://assets/textures/planet/mouth frames/mouth_frame_4.png" id="5_bypng"]
 [ext_resource type="Texture2D" uid="uid://cirl0bprclbai" path="res://assets/textures/planet/mouth frames/mouth_frame_2.png" id="6_tm3vg"]

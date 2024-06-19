@@ -50,7 +50,7 @@ func notify_hit(damage_amount: float) -> void:
 		queue_free()
 
 func _on_hitbox_body_entered(body: Node2D):
-	if self.target_attacked == null:
+	if self.target_attacked == null and body != null:
 		self.target_attacked = body
 		attack_target()
 		attack_rate.start()

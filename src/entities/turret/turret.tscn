@@ -1,15 +1,15 @@
 [gd_scene load_steps=12 format=3 uid="uid://uwe8qmpynkes"]
 
-[ext_resource type="Script" path="res://src/entities/turret/turret.gd" id="1_857so"]
-[ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/entities/turret/turret_projectile.tscn" id="2_1oth1"]
-[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="3_mraiy"]
-[ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="4_05eq1"]
-[ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="5_pl1mt"]
-[ext_resource type="AudioStream" uid="uid://hgf3thono5bk" path="res://assets/audio/sfx/shot.wav" id="6_o01pf"]
+[ext_resource type="Script" path="res://src/entities/turret/Turret.gd" id="1_w6f2q"]
+[ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/entities/turret/TurretProjectile.tscn" id="2_2m54x"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="3_tfabn"]
+[ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="4_khimo"]
+[ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="5_vvil0"]
+[ext_resource type="AudioStream" uid="uid://hgf3thono5bk" path="res://assets/audio/sfx/shot.wav" id="6_4tkbk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ftca4"]
 resource_local_to_scene = true
-shader = ExtResource("4_05eq1")
+shader = ExtResource("4_khimo")
 shader_parameter/active = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tool7"]
@@ -45,10 +45,10 @@ _data = {
 
 [node name="Turret" type="StaticBody2D"]
 light_mask = 8
-script = ExtResource("1_857so")
-PROJECTILE_SCENE = ExtResource("2_1oth1")
+script = ExtResource("1_w6f2q")
+PROJECTILE_SCENE = ExtResource("2_2m54x")
 
-[node name="HealthBar" parent="." instance=ExtResource("3_mraiy")]
+[node name="HealthBar" parent="." instance=ExtResource("3_tfabn")]
 offset_left = -24.0
 offset_top = -32.0
 offset_right = 24.0
@@ -60,7 +60,7 @@ wait_time = 0.5
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ftca4")
 scale = Vector2(2, 2)
-texture = ExtResource("5_pl1mt")
+texture = ExtResource("5_vvil0")
 
 [node name="FirePosition" type="Marker2D" parent="Sprite"]
 unique_name_in_owner = true
@@ -84,7 +84,7 @@ position = Vector2(0, -34)
 shape = SubResource("CircleShape2D_cmckc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_o01pf")
+stream = ExtResource("6_4tkbk")
 bus = &"Tools"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
