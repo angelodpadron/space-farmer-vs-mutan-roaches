@@ -1,31 +1,19 @@
-extends StaticBody2D
+extends Area2D
 
-@onready var grow_timer: Timer = $GrowTimer
-@onready var plant: AnimatedSprite2D = $Plant
-@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@export var plant_scene: PackedScene
 
-var plant_is_growing = false
-var collectable = false
+var has_plant: bool = false
 
 
-func _on_grow_timer_timeout():
-	plant.play("grow")
+func _on_detection_area_area_entered(area: SeedpackHitbox):
+	if has_plant:
+		return
+		
+	var plant_instance: Plant = plant_scene.instantiate()
+	plant_instance.initialize(self)
+	plant_instance.is_beign_picked_up.connect(on_plant_picked_up)
+	has_plant = true
+	
 
-
-func _on_area_2d_area_entered(area):
-	if not plant_is_growing and not collectable:
-		grow_timer.start()
-		plant_is_growing=true
-
-
-func _on_plant_animation_finished():
-	collectable = true
-	plant_is_growing = false
-
-
-func _on_area_2d_body_entered(player: Player):
-	if collectable:
-		audio_player.play()
-		player.add_crop()
-		collectable = false
-		plant.stop()
+func on_plant_picked_up() -> void:
+	has_plant = false

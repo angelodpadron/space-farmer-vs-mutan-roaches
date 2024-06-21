@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://7uta0nxar4dy"]
+[gd_scene load_steps=7 format=3 uid="uid://7uta0nxar4dy"]
 
 [ext_resource type="Texture2D" uid="uid://ccylp330sr4p7" path="res://assets/textures/temp-tilesheet.png" id="1_tfnue"]
 [ext_resource type="Script" path="res://src/entities/crop/Seedpack.gd" id="1_xn78s"]
+[ext_resource type="Script" path="res://src/entities/crop/Hitbox.gd" id="3_sw38l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k20j"]
 atlas = ExtResource("1_tfnue")
@@ -24,17 +25,18 @@ radius = 5.09902
 [node name="Seedpack" type="StaticBody2D"]
 scale = Vector2(3, 3)
 collision_layer = 64
-collision_mask = 64
+collision_mask = 0
 script = ExtResource("1_xn78s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a0fox")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
-collision_mask = 64
+collision_mask = 0
+script = ExtResource("3_sw38l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_jklni")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="Hitbox" to="." method="_on_area_2d_input_event"]

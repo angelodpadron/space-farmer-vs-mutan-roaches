@@ -22,7 +22,7 @@ shader_parameter/active = false
 [sub_resource type="Resource" id="Resource_4gv68"]
 script = ExtResource("10_4ubp3")
 enemy = ExtResource("9_6okg2")
-enemy_count = 1
+enemy_count = 0
 time_start = 0
 time_end = 60
 spawn_delay = 0
