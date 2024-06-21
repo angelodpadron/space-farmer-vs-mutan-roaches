@@ -1,6 +1,6 @@
 extends Control
 
-var main_menu="res://src/screens/menus/main_menu.tscn"
+var main_menu="res://src/screens/menus/MainMenu.tscn"
 
 func _ready():
 	hide()

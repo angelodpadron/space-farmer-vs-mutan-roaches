@@ -2,8 +2,7 @@ extends AbstractState
 
 
 func enter() -> void:
-	print("player state: walk")
-	
+	pass
 
 func handle_input(event: InputEvent) -> void:
 	pass
