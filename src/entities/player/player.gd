@@ -4,8 +4,6 @@ class_name Player
 
 # signals
 
-signal health_changed
-signal crop_changed
 signal hit(amount)
 
 @export var speed: float = 250
@@ -26,23 +24,24 @@ var interactables: Array = []
 
 var dead: bool = false
 
+func _ready() -> void:
+	Global.player_died.connect(_on_player_died)
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("place_turret") and PlayerState.crop_amount > 0:
+	var crop_amount = Global.player_crop_amount
+	if Input.is_action_just_pressed("place_turret") and crop_amount > 0:
 		_add_turret()
-		PlayerState.decrease_crop_amount(1)
-		crop_changed.emit()
-	if Input.is_action_just_pressed("interact") and !interactables.is_empty() and PlayerState.crop_amount >= 2:
+		Global.decrease_crop_amount(1)
+	if Input.is_action_just_pressed("interact") and !interactables.is_empty() and crop_amount >= 2:
 		interactables[0].interact(self)
-		PlayerState.decrease_crop_amount(2)
-		crop_changed.emit()
+		Global.decrease_crop_amount(2)
 
 func add_crop() -> void:
-	PlayerState.increase_crop_amount(1)
-	crop_changed.emit()
+	Global.increase_crop_amount(1)
 
 func _add_turret() -> void:
 	var turret_instance = turret_scene.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
+	Global.increase_turret_amount(1)
 
 func _on_interaction_area_interactable_entered(area: Interactable) -> void:
 	interactables.insert(0,area)
@@ -83,12 +82,11 @@ func _apply_movement() -> void:
 	move_and_slide()	
 	
 func _handle_hit(damage_amount: int) -> void:
-	PlayerState.decrease_health(damage_amount)
-	health_changed.emit()
-	
-	if PlayerState.health <= 0:
-		dead = true
+	Global.decrease_health(damage_amount)
 	
 	animation_player.play("hit")	
 	audio_player.play()
+	
+func _on_player_died() -> void:
+	dead = true
 	

@@ -7,7 +7,10 @@ class_name HealthBar
 
 var health = 0 : set = _set_health
 
-func init_health(health: float) -> void:
+func _ready() -> void:
+	init_health(Global.player_health)
+
+func init_health(health: int) -> void:
 	self.max_value = health
 	self.health = health
 

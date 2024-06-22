@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbqq1akcure31"]
+[gd_scene load_steps=4 format=3 uid="uid://dbqq1akcure31"]
 
 [ext_resource type="Script" path="res://src/screens/gui/Hud.gd" id="1_ns2ru"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="4_lq6ea"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="4_ncy8v"]
-[ext_resource type="Texture2D" uid="uid://npo0ctbm3nnr" path="res://assets/ui/plant.png" id="7_6f4nc"]
 
 [node name="HUD" type="MarginContainer"]
 anchors_preset = 15
@@ -30,7 +29,8 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Value" type="Label" parent="HBoxContainer/Bars/Bar"]
+[node name="HealthAmount" type="Label" parent="HBoxContainer/Bars/Bar"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_lq6ea")
@@ -46,41 +46,29 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Counter" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Counter" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Counters" type="MarginContainer" parent="HBoxContainer/Counter"]
+[node name="CropCountContainer" type="MarginContainer" parent="HBoxContainer/Counter"]
 layout_mode = 2
 
-[node name="Background" type="NinePatchRect" parent="HBoxContainer/Counter/Counters"]
-custom_minimum_size = Vector2(100, 40)
+[node name="CropCount" type="Label" parent="HBoxContainer/Counter/CropCountContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Counter/Counters/Background"]
-visible = false
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 64.0
-offset_bottom = 44.0
-grow_vertical = 2
-texture = ExtResource("7_6f4nc")
-flip_h = true
-
-[node name="Crop Count" type="Label" parent="HBoxContainer/Counter/Counters/Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 1.0
-offset_right = -7.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_lq6ea")
 theme_override_font_sizes/font_size = 28
-text = "0"
+text = "CROP    0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TurretCountContainer" type="MarginContainer" parent="HBoxContainer/Counter"]
+layout_mode = 2
+
+[node name="TurretCount" type="Label" parent="HBoxContainer/Counter/TurretCountContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_lq6ea")
+theme_override_font_sizes/font_size = 28
+text = "TURRETS    0"
 horizontal_alignment = 2
 vertical_alignment = 1
