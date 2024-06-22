@@ -10,10 +10,17 @@ func _ready():
 	Global.player_crop_amount_changed.connect(_update_crop_count)
 	Global.turret_count_changed.connect(_update_turret_count)
 	
+	init_health_bar(Global.player_health)
+	
+
+func init_health_bar(amount: int) -> void:
+	health_bar.init_health(amount)
+	health_bar_amount.text = str(amount)	
+	
 	
 func _update_player_health_hud(amount: int) -> void:
 	health_bar._set_health(amount)
-	health_bar_amount.text = "%.1f" % amount
+	health_bar_amount.text = str(amount)
 	
 	
 func _update_crop_count(amount: int):
