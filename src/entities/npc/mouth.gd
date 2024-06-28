@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 class_name WorldMouth
 
 signal rumble
@@ -8,13 +8,15 @@ signal rumble
 @export var feed_add_time: int = 3
 
 @onready var rumble_timer: Timer = $RumbleTimer
-@onready var mouth_animation_player = $MouthAnimationPlayer
-@onready var eating_time = $EatingTime
+@onready var mouth_animation_player: AnimationPlayer = $MouthAnimationPlayer
+@onready var eating_time:Timer = $EatingTime
+@onready var interaction_area: InteractionArea = $InteractionArea
 
 var rumble_count: int = 1
 
 func _ready():
-	rumble_timer.timeout.connect(demand_food)
+	Global.attack_mode_engaged.connect(demand_food)
+	interaction_area.interact = Callable(self, "_on_interact")
 	_play_animation("idle")
 	
 
@@ -46,6 +48,10 @@ func _on_eating_time_timeout():
 	rumble_timer.start(first_wave_wait_time)
 	
 	
-func interact(player: Player):
-	print_debug("interacted with world")
-	feed()
+func _on_interact():
+	if Global.player_crop_amount >= 2:
+		feed()
+		Global.decrease_crop_amount(2)
+		return
+		
+	print("Not enough!")

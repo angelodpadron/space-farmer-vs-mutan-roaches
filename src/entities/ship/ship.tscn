@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6pn4kb2uubvb"]
+[gd_scene load_steps=7 format=3 uid="uid://b6pn4kb2uubvb"]
 
+[ext_resource type="Script" path="res://src/entities/ship/Ship.gd" id="1_nws7o"]
 [ext_resource type="Texture2D" uid="uid://dwaq2oqfst04m" path="res://assets/textures/ship/spaceship.png" id="1_wqycs"]
+[ext_resource type="PackedScene" uid="uid://di4pxunv1308r" path="res://src/utils/interaction/InteractionArea.tscn" id="3_ffxyv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kcwa3"]
 atlas = ExtResource("1_wqycs")
@@ -17,12 +19,26 @@ animations = [{
 "speed": 0.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_usyst"]
+radius = 40.0125
+
 [node name="Ship" type="StaticBody2D"]
 collision_layer = 128
 collision_mask = 0
+script = ExtResource("1_nws7o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_r2npw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -14, -13, 4, -13, 12, 13, 12, 13, 3)
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_ffxyv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_usyst")
+
+[node name="GenerationRate" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="GenerationRate" to="." method="_on_generation_rate_timeout"]

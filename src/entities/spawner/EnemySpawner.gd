@@ -1,10 +1,10 @@
 extends Node2D
 
+# TODO: FINISH IMPLEMENTATION :') 
+
 @export var spawns: Array[SpawnInfo] = []
 
 @onready var player: Player = $%Player
-@onready var mouth: WorldMouth = $%Mouth
-@onready var timer: Timer = $SpawnTimer
 
 var time: int = 0
 
@@ -24,10 +24,6 @@ func spawn_enemies() -> void:
 			
 			for count in (spawn.enemy_count):
 				var enemy_spawn = new_enemy.instantiate()
-				enemy_spawn.global_position = mouth.global_position
+				enemy_spawn.global_position = get_parent().global_position
 				add_child(enemy_spawn)
 				enemy_spawn.initialize(player)
-
-
-func _on_spawn_timer_timeout():
-	spawn_enemies()
