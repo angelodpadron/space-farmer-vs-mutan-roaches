@@ -1,16 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=21 format=3 uid="uid://m1ymcbgrrtb3"]
 
-[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/Hud.tscn" id="1_7fwt3"]
+[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="1_7fwt3"]
 [ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/PauseMenu.tscn" id="2_4nkqr"]
-[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/Mouth.tscn" id="3_7nm61"]
+[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="3_7nm61"]
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="4_h6x86"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="5_4glke"]
 [ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/crop/PlantingZone.tscn" id="6_ymcn3"]
 [ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/crop/Seedpack.tscn" id="7_s28t5"]
 [ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/entities/spawner/EnemySpawner.tscn" id="8_mf81d"]
-[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/Cockroach.tscn" id="9_6okg2"]
+[ext_resource type="PackedScene" uid="uid://dbibl1x78rnnp" path="res://src/entities/enemies/cockroach.tscn" id="9_6okg2"]
 [ext_resource type="Script" path="res://src/entities/spawner/SpawnInfo.gd" id="10_4ubp3"]
-[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/Ship.tscn" id="11_p76ss"]
+[ext_resource type="PackedScene" uid="uid://dk1plr47pruye" path="res://src/entities/enemies/tank_cockroach.tscn" id="11_8q50q"]
+[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/ship.tscn" id="11_p76ss"]
 [ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="12_akw5v"]
 [ext_resource type="Texture2D" uid="uid://cpnuj74b1fk1p" path="res://assets/textures/environment/survivalgame-terrian-cliffs.png" id="13_ps66t"]
 
@@ -22,7 +23,15 @@ shader_parameter/active = false
 [sub_resource type="Resource" id="Resource_4gv68"]
 script = ExtResource("10_4ubp3")
 enemy = ExtResource("9_6okg2")
-enemy_count = 0
+enemy_count = 2
+time_start = 0
+time_end = 60
+spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_ewjxm"]
+script = ExtResource("10_4ubp3")
+enemy = ExtResource("11_8q50q")
+enemy_count = 1
 time_start = 0
 time_end = 60
 spawn_delay = 0
@@ -247,7 +256,7 @@ position = Vector2(17, 303)
 position = Vector2(137, 24)
 
 [node name="EnemySpawner" parent="Entities" instance=ExtResource("8_mf81d")]
-spawns = Array[ExtResource("10_4ubp3")]([SubResource("Resource_4gv68")])
+spawns = Array[ExtResource("10_4ubp3")]([SubResource("Resource_4gv68"), SubResource("Resource_ewjxm")])
 
 [node name="Ship" parent="Entities" instance=ExtResource("11_p76ss")]
 position = Vector2(-293, -66.9999)
@@ -266,4 +275,3 @@ layer_2/name = "top"
 layer_2/tile_data = PackedInt32Array()
 
 [connection signal="crop_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_on_player_crop_changed"]
-[connection signal="health_changed" from="Entities/Player" to="CanvasLayer/GUI" method="update_player_health_hud"]

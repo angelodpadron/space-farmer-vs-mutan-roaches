@@ -13,7 +13,6 @@ func _on_detection_area_area_entered(area: SeedpackHitbox):
 	plant_instance.initialize(self)
 	plant_instance.is_beign_picked_up.connect(on_plant_picked_up)
 	has_plant = true
-	
 
 func on_plant_picked_up() -> void:
 	has_plant = false

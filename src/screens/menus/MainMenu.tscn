@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://src/screens/menus/MainMenu.gd" id="1_ylvkd"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="2_3y70t"]
-[ext_resource type="PackedScene" uid="uid://m1ymcbgrrtb3" path="res://src/screens/levels/Level1.tscn" id="2_dhiir"]
-[ext_resource type="PackedScene" uid="uid://birrju5jro8vn" path="res://src/screens/menus/Options.tscn" id="4_6xg7n"]
+[ext_resource type="PackedScene" uid="uid://m1ymcbgrrtb3" path="res://src/screens/levels/level1.tscn" id="2_dhiir"]
+[ext_resource type="PackedScene" uid="uid://birrju5jro8vn" path="res://src/screens/menus/options.tscn" id="4_6xg7n"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

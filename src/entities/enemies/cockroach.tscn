@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
 [ext_resource type="Script" path="res://src/entities/enemies/Cockroach.gd" id="1_pu8oi"]
-[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="2_r6vau"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="2_r6vau"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="3_1ku0b"]
 [ext_resource type="AudioStream" uid="uid://bre24pnotb30p" path="res://assets/audio/sfx/small-hit.wav" id="5_ljgg7"]
 

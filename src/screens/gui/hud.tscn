@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/screens/gui/Hud.gd" id="1_ns2ru"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="4_lq6ea"]
-[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="4_ncy8v"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="4_ncy8v"]
 [ext_resource type="Texture2D" uid="uid://npo0ctbm3nnr" path="res://assets/ui/plant.png" id="7_6f4nc"]
 
 [node name="HUD" type="MarginContainer"]

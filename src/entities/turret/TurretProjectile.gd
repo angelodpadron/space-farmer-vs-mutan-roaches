@@ -23,5 +23,5 @@ func _on_life_time_timeout():
 
 func _on_hitbox_body_entered(body):
 	if body.has_method("notify_hit"):
-		body.notify_hit(damage_amout)
+		body.notify_hit(damage_amout, global_position)
 	emit_signal("delete_requested", self)
