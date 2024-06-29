@@ -15,9 +15,6 @@ var turret_count: int = 0
 # Game state related signals
 signal attack_mode_engaged
 
-# Game state
-var attack_mode: bool = false
-
 
 func decrease_health(amount: int) -> void:
 	player_health -= amount
@@ -47,7 +44,5 @@ func decrease_turret_amount(amount: int) -> void:
 	
 
 func start_attack_mode() -> void:
-	print("Global: start attack mode")
-	attack_mode = true
-
+	attack_mode_engaged.emit()
 

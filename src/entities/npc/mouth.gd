@@ -15,14 +15,16 @@ signal rumble
 var rumble_count: int = 1
 
 func _ready():
+	add_to_group("mouths")
 	Global.attack_mode_engaged.connect(demand_food)
 	interaction_area.interact = Callable(self, "_on_interact")
 	_play_animation("idle")
 	
 
 func demand_food() -> void:
+	print("demand food")
 	rumble_count *= 2
-	rumble.emit(rumble_count)
+	rumble.emit()
 	_play_animation("rumble")
 	rumble_timer.start(min(first_wave_wait_time/rumble_count,max_spawn_count))
 
