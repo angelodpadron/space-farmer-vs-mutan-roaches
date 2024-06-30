@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/entities/turret/Turret.gd" id="1_w6f2q"]
 [ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/entities/turret/TurretProjectile.tscn" id="2_2m54x"]
-[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="3_tfabn"]
+[ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/healthbar.tscn" id="3_tfabn"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="4_khimo"]
 [ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="5_vvil0"]
 [ext_resource type="AudioStream" uid="uid://hgf3thono5bk" path="res://assets/audio/sfx/shot.wav" id="6_4tkbk"]

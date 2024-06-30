@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="4_lq6ea"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="4_ncy8v"]
 
+
 [node name="HUD" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0

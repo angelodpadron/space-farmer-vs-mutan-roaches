@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bh4rcoxegbqh0" path="res://assets/textures/player/astroFarmer.png" id="1"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="1_auksh"]
 [ext_resource type="Script" path="res://src/entities/player/Player.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://uwe8qmpynkes" path="res://src/entities/turret/Turret.tscn" id="2_i8jcp"]
+[ext_resource type="PackedScene" uid="uid://uwe8qmpynkes" path="res://src/entities/turret/turret.tscn" id="2_i8jcp"]
 [ext_resource type="AudioStream" uid="uid://ccvea73egajyt" path="res://assets/audio/sfx/hit.wav" id="3_b4u2j"]
 [ext_resource type="Script" path="res://src/entities/player/StateMachine.gd" id="4_nxo1m"]
 [ext_resource type="Script" path="res://src/entities/player/states/Idle.gd" id="5_0pd5h"]

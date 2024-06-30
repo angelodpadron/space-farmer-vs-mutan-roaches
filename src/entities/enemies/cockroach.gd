@@ -5,6 +5,7 @@ class_name Cockroach
 @export var speed: float = 100
 @export var health: float = 15
 @export var damage_amount: int = 1
+@export var knockback_multiplier : float = 50
 
 @onready var attack_rate: Timer = $AttackRate
 @onready var healthbar: ProgressBar = $HealthBar
@@ -25,7 +26,7 @@ func initialize(body: Node) -> void:
 	
 func _physics_process(delta):	
 	var velocity = global_position.direction_to(current_target.global_position)
-	var angle_to_target = global_position.direction_to(current_target.global_position).angle()
+	var angle_to_target = global_position.direction_to(current_target.global_position).angle() - 80
 	body_sprite.rotation = move_toward(body_sprite.rotation, angle_to_target, delta * 100)
 	move_and_collide(velocity * speed * delta)
 		
@@ -39,7 +40,7 @@ func on_body_leaved_detection_area(body: Node) -> void:
 	if current_target == body:
 		current_target = main_target
 		
-func notify_hit(damage_amount: float) -> void:
+func notify_hit(damage_amount: float, hit_source : Vector2) -> void:
 	
 	animation_player.play("hit")
 	
@@ -48,6 +49,11 @@ func notify_hit(damage_amount: float) -> void:
 	audio_player.play()
 	if health <= 0:
 		queue_free()
+		return
+		
+	var knockback_direcction= hit_source.direction_to(global_position)
+	var knockback_position= knockback_direcction * knockback_multiplier
+	global_position+=knockback_position
 
 func _on_hitbox_body_entered(body: Node2D):
 	if self.target_attacked == null and body != null:

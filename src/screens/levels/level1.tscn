@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=16 format=3 uid="uid://m1ymcbgrrtb3"]
 
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="1_7fwt3"]
 [ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/PauseMenu.tscn" id="2_4nkqr"]
-[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/Mouth.tscn" id="3_7nm61"]
+[ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/mouth.tscn" id="3_7nm61"]
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="4_h6x86"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="5_4glke"]
 [ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/crop/PlantingZone.tscn" id="6_ymcn3"]
 [ext_resource type="PackedScene" uid="uid://7uta0nxar4dy" path="res://src/entities/crop/Seedpack.tscn" id="7_s28t5"]
-[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/Ship.tscn" id="11_p76ss"]
+[ext_resource type="PackedScene" uid="uid://cx7vehfeoijgk" path="res://src/entities/spawner/EnemySpawner.tscn" id="8_mf81d"]
+[ext_resource type="PackedScene" uid="uid://b6pn4kb2uubvb" path="res://src/entities/ship/ship.tscn" id="11_p76ss"]
 [ext_resource type="Texture2D" uid="uid://dgdoykki3ngyu" path="res://assets/textures/environment/survivalgame-terrian-defult.png" id="12_akw5v"]
 [ext_resource type="Texture2D" uid="uid://cpnuj74b1fk1p" path="res://assets/textures/environment/survivalgame-terrian-cliffs.png" id="13_ps66t"]
 
@@ -235,6 +236,8 @@ position = Vector2(17, 303)
 
 [node name="Seedpack" parent="Entities" instance=ExtResource("7_s28t5")]
 position = Vector2(137, 24)
+
+[node name="EnemySpawner" parent="Entities" instance=ExtResource("8_mf81d")]
 
 [node name="Ship" parent="Entities" instance=ExtResource("11_p76ss")]
 position = Vector2(-293, -66.9999)
