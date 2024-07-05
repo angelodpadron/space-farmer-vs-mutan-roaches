@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://m1ymcbgrrtb3"]
 
-[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/hud.tscn" id="1_7fwt3"]
+[ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/Hud.tscn" id="1_7fwt3"]
 [ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/PauseMenu.tscn" id="2_4nkqr"]
 [ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/Mouth.tscn" id="3_7nm61"]
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="4_h6x86"]

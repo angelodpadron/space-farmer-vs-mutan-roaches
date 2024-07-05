@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://btq5xpp8e6egs"]
+
+[ext_resource type="Script" path="res://src/screens/gui/Objectives.gd" id="1_6tybw"]
+[ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="1_ab73i"]
+
+[node name="Objectives" type="VBoxContainer"]
+script = ExtResource("1_6tybw")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ab73i")
+theme_override_font_sizes/font_size = 24
+text = "Objectives"
+
+[node name="Details" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ab73i")
+theme_override_font_sizes/font_size = 24

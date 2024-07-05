@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbqq1akcure31"]
+[gd_scene load_steps=5 format=3 uid="uid://dbqq1akcure31"]
 
 [ext_resource type="Script" path="res://src/screens/gui/Hud.gd" id="1_ns2ru"]
 [ext_resource type="FontFile" uid="uid://dm588uwnha73f" path="res://assets/fonts/Arcade.ttf" id="4_lq6ea"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="4_ncy8v"]
+[ext_resource type="PackedScene" uid="uid://btq5xpp8e6egs" path="res://src/screens/gui/Objectives.tscn" id="4_nehhw"]
 
 [node name="HUD" type="MarginContainer"]
 anchors_preset = 15
@@ -16,20 +17,23 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 script = ExtResource("1_ns2ru")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="Bars" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Bars" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bar" type="HBoxContainer" parent="HBoxContainer/Bars"]
+[node name="Bar" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Bars"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HealthAmount" type="Label" parent="HBoxContainer/Bars/Bar"]
+[node name="HealthAmount" type="Label" parent="VBoxContainer/HBoxContainer/Bars/Bar"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
@@ -39,20 +43,20 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthBar" parent="HBoxContainer/Bars/Bar" instance=ExtResource("4_ncy8v")]
+[node name="HealthBar" parent="VBoxContainer/HBoxContainer/Bars/Bar" instance=ExtResource("4_ncy8v")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(512, 10)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Counter" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Counter" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="CropCountContainer" type="MarginContainer" parent="HBoxContainer/Counter"]
+[node name="CropCountContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Counter"]
 layout_mode = 2
 
-[node name="CropCount" type="Label" parent="HBoxContainer/Counter/CropCountContainer"]
+[node name="CropCount" type="Label" parent="VBoxContainer/HBoxContainer/Counter/CropCountContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_lq6ea")
@@ -61,10 +65,10 @@ text = "CROP    0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TurretCountContainer" type="MarginContainer" parent="HBoxContainer/Counter"]
+[node name="TurretCountContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Counter"]
 layout_mode = 2
 
-[node name="TurretCount" type="Label" parent="HBoxContainer/Counter/TurretCountContainer"]
+[node name="TurretCount" type="Label" parent="VBoxContainer/HBoxContainer/Counter/TurretCountContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_lq6ea")
@@ -72,3 +76,10 @@ theme_override_font_sizes/font_size = 28
 text = "TURRETS    0"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Objectives" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("4_nehhw")]
+layout_mode = 2
