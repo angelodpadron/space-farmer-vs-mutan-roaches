@@ -14,12 +14,12 @@ func enter() -> void:
 func exit() -> void:
 	return
 	
-func handle_input(event: InputEvent) -> void:
+func handle_input(_event: InputEvent) -> void:
 	return
 	
-func handle_event(event: String, value = null) -> void:
+func handle_event(_event: String, value = null) -> void:
 	return
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	return
 

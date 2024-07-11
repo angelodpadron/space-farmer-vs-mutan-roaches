@@ -1,18 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbibl1x78rnnp"]
+[gd_scene load_steps=13 format=3 uid="uid://dbibl1x78rnnp"]
 
-[ext_resource type="Texture2D" uid="uid://cvs26inl2i217" path="res://assets/textures/cockroach/cockroach.png" id="1_pnvhc"]
 [ext_resource type="Script" path="res://src/entities/enemies/Cockroach.gd" id="1_pu8oi"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="2_r6vau"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="3_1ku0b"]
-[ext_resource type="AudioStream" uid="uid://bre24pnotb30p" path="res://assets/audio/sfx/small-hit.wav" id="5_ljgg7"]
+[ext_resource type="Script" path="res://src/components/HealthComponent.gd" id="3_xvqk6"]
+[ext_resource type="Script" path="res://src/components/HitboxComponent.gd" id="4_1fut1"]
+[ext_resource type="Texture2D" uid="uid://cqe3hw71s83a8" path="res://assets/textures/cockroach/cockroach-pixel.png" id="4_d1q2j"]
+[ext_resource type="PackedScene" uid="uid://sp5n5keq64rl" path="res://src/components/DamageableSpriteComponent.tscn" id="6_8yk4v"]
+[ext_resource type="PackedScene" uid="uid://dj84r3r8qy3hy" path="res://src/components/HitAudioComponent.tscn" id="9_w766q"]
+[ext_resource type="AudioStream" uid="uid://d12c2qm73tt5k" path="res://assets/audio/sfx/cockroach_hit.wav" id="10_ok24r"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5cpy"]
-resource_local_to_scene = true
-shader = ExtResource("3_1ku0b")
-shader_parameter/active = false
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vlmvc"]
-load_path = "res://.godot/imported/turret.png-5b87eb8afe2dcf92c85685f6efae5aa4.ctex"
+[sub_resource type="CircleShape2D" id="CircleShape2D_qwj7i"]
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk0af"]
 radius = 9.0
@@ -20,76 +19,45 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7g1id"]
 radius = 108.0
 
-[sub_resource type="SystemFont" id="SystemFont_5ig1x"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_gslri"]
-font = SubResource("SystemFont_5ig1x")
-font_size = 11
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qwj7i"]
-radius = 15.0
-
-[sub_resource type="Animation" id="Animation_acuxw"]
-resource_name = "hit"
-length = 0.2
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"enable_hit_flash"
-}, {
-"args": [],
-"method": &"disable_hit_flash"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6ae3"]
-_data = {
-"hit": SubResource("Animation_acuxw")
-}
-
 [node name="Cockroach" type="CharacterBody2D"]
 visibility_layer = 8
 position = Vector2(0, -9)
 collision_layer = 8
-collision_mask = 89
+collision_mask = 217
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_pu8oi")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_d1q2j")
+
 [node name="HealthBar" parent="." instance=ExtResource("2_r6vau")]
-visible = false
 offset_left = -16.0
 offset_top = -20.0
 offset_right = 16.0
 offset_bottom = -16.0
+MAX_VALUE = 50
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_xvqk6")
+MAX_HEALTH = 50
+
+[node name="DamageableSpriteComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_8yk4v")]
+hit_shader = ExtResource("3_1ku0b")
+sprite = NodePath("../Sprite2D")
+
+[node name="HitAudioComponent" parent="." instance=ExtResource("9_w766q")]
+hit_sound = ExtResource("10_ok24r")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 131
+script = ExtResource("4_1fut1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_qwj7i")
 
 [node name="AttackRate" type="Timer" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_i5cpy")
-texture = ExtResource("1_pnvhc")
-
-[node name="Antenna1" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(4, -9)
-rotation = 0.434562
-scale = Vector2(0.01, 0.1)
-texture = SubResource("CompressedTexture2D_vlmvc")
-
-[node name="Antenna2" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-5, -9)
-rotation = -0.411446
-scale = Vector2(0.01, 0.1)
-texture = SubResource("CompressedTexture2D_vlmvc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yk0af")
@@ -100,34 +68,15 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_7g1id")
+debug_color = Color(0.954771, 0.185129, 0.278565, 0.42)
 
-[node name="Label" type="Label" parent="DetectionArea"]
-visible = false
-offset_left = -26.0
-offset_top = 12.0
-offset_right = 30.0
-offset_bottom = 35.0
-text = "Cockroach"
-label_settings = SubResource("LabelSettings_gslri")
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_qwj7i")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_ljgg7")
-bus = &"Enemy"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_q6ae3")
-}
-
+[connection signal="died" from="HealthComponent" to="." method="health_depleted"]
+[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_set_health"]
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="HitboxComponent" to="." method="_on_hitbox_area_exited"]
+[connection signal="damage" from="HitboxComponent" to="DamageableSpriteComponent" method="play_animation"]
+[connection signal="damage" from="HitboxComponent" to="HitAudioComponent" method="play_hit_sound"]
+[connection signal="damaged" from="HitboxComponent" to="HealthComponent" method="take_damage"]
 [connection signal="timeout" from="AttackRate" to="." method="attack_target"]
-[connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
-[connection signal="body_exited" from="DetectionArea" to="." method="on_body_leaved_detection_area"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]

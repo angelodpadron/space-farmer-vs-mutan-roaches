@@ -22,8 +22,8 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
-alignment = 1
+size_flags_vertical = 2
+alignment = 2
 
 [node name="Bars" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -31,7 +31,7 @@ size_flags_horizontal = 3
 
 [node name="Bar" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Bars"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 
 [node name="HealthAmount" type="Label" parent="VBoxContainer/HBoxContainer/Bars/Bar"]
 unique_name_in_owner = true
@@ -39,11 +39,32 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("4_lq6ea")
 theme_override_font_sizes/font_size = 28
-text = "10"
+text = "Space farmer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealthBar" parent="VBoxContainer/HBoxContainer/Bars/Bar" instance=ExtResource("4_ncy8v")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 10)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Bar2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShipHealthAmount" type="Label" parent="VBoxContainer/HBoxContainer/Bars/Bar2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_lq6ea")
+theme_override_font_sizes/font_size = 28
+text = "space ship"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShipHealthBar" parent="VBoxContainer/HBoxContainer/Bars/Bar2" instance=ExtResource("4_ncy8v")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(512, 10)
 layout_mode = 2
@@ -79,7 +100,7 @@ vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 2
+size_flags_vertical = 2
 
 [node name="Objectives" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("4_nehhw")]
 layout_mode = 2

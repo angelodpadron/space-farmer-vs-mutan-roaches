@@ -18,7 +18,9 @@ func update(delta: float) -> void:
 		
 func handle_event(event: String, value = null) -> void:
 	match event:
-		"hit":
-			character._handle_hit(value)
-			if character.dead:
-				finished.emit("dead")
+		#"hit":
+			#character._handle_hit(value)
+			#if character.dead:
+				#finished.emit("dead")
+		"dead":
+			finished.emit("dead")

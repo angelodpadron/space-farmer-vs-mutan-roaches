@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://m1ymcbgrrtb3"]
+[gd_scene load_steps=17 format=3 uid="uid://m1ymcbgrrtb3"]
 
+[ext_resource type="Script" path="res://src/screens/levels/Level1.gd" id="1_0cpcl"]
 [ext_resource type="PackedScene" uid="uid://dbqq1akcure31" path="res://src/screens/gui/Hud.tscn" id="1_7fwt3"]
 [ext_resource type="PackedScene" uid="uid://bhs876jqwqsvm" path="res://src/screens/menus/PauseMenu.tscn" id="2_4nkqr"]
 [ext_resource type="PackedScene" uid="uid://dtswk33m7i1du" path="res://src/entities/npc/Mouth.tscn" id="3_7nm61"]
+[ext_resource type="PackedScene" uid="uid://dpvddb0jovfxp" path="res://src/screens/menus/GameOver.tscn" id="3_ikuhh"]
 [ext_resource type="PackedScene" uid="uid://c60c8bomjw5g" path="res://src/entities/player/Player.tscn" id="4_h6x86"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="5_4glke"]
 [ext_resource type="PackedScene" uid="uid://dix62shbkvm7i" path="res://src/entities/crop/PlantingZone.tscn" id="6_ymcn3"]
@@ -153,6 +155,7 @@ sources/0 = SubResource("TileSetAtlasSource_gxq32")
 sources/1 = SubResource("TileSetAtlasSource_ok8vv")
 
 [node name="Main" type="Node"]
+script = ExtResource("1_0cpcl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -164,9 +167,16 @@ offset_right = 800.0
 offset_bottom = 600.0
 grow_horizontal = 1
 grow_vertical = 1
+PLAYER_MAX_HEALTH_VALUE = 10
+SHIP_MAX_HEALTH_VALUE = 100
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_4nkqr")]
+visible = false
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("3_ikuhh")]
+unique_name_in_owner = true
+process_mode = 3
 visible = false
 
 [node name="Entities" type="Node2D" parent="."]
@@ -176,7 +186,7 @@ unique_name_in_owner = true
 position = Vector2(797, 298)
 scale = Vector2(3, 3)
 
-[node name="Player" parent="Entities" groups=["player"] instance=ExtResource("4_h6x86")]
+[node name="Player" parent="Entities" instance=ExtResource("4_h6x86")]
 unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_mgp77")
@@ -234,11 +244,14 @@ position = Vector2(17, 261)
 position = Vector2(17, 303)
 
 [node name="Seedpack" parent="Entities" instance=ExtResource("7_s28t5")]
+unique_name_in_owner = true
 position = Vector2(137, 24)
 
 [node name="Ship" parent="Entities" instance=ExtResource("11_p76ss")]
+unique_name_in_owner = true
 position = Vector2(-293, -66.9999)
 scale = Vector2(5, 5)
+fuel_required = 30
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_830lb")
@@ -251,3 +264,7 @@ layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "top"
 layer_2/tile_data = PackedInt32Array()
+
+[connection signal="health_changed" from="Entities/Player" to="CanvasLayer/GUI" method="_update_player_health_hud"]
+[connection signal="initial_health" from="Entities/Player" to="CanvasLayer/GUI" method="init_player_health"]
+[connection signal="health_changed" from="Entities/Ship" to="CanvasLayer/GUI" method="_update_ship_health_hud"]

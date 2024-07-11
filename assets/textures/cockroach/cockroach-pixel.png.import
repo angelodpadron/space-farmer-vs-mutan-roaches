@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh4rcoxegbqh0"
-path="res://.godot/imported/astroFarmer.png-94e93e8647fc3cb952cbd2a08010e83a.ctex"
+uid="uid://cqe3hw71s83a8"
+path="res://.godot/imported/cockroach-pixel.png-d5689ff72597c549c6d7a2ab1d783c0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player/astroFarmer.png"
-dest_files=["res://.godot/imported/astroFarmer.png-94e93e8647fc3cb952cbd2a08010e83a.ctex"]
+source_file="res://assets/textures/cockroach/cockroach-pixel.png"
+dest_files=["res://.godot/imported/cockroach-pixel.png-d5689ff72597c549c6d7a2ab1d783c0c.ctex"]
 
 [params]
 

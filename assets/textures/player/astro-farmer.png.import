@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://npo0ctbm3nnr"
-path="res://.godot/imported/plant.png-1c485c0473ee25897fe33cf1dcd24a8b.ctex"
+uid="uid://bfipbb6yi0qih"
+path="res://.godot/imported/astro-farmer.png-43495c5a05aa3a476738c86d72031d29.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/plant.png"
-dest_files=["res://.godot/imported/plant.png-1c485c0473ee25897fe33cf1dcd24a8b.ctex"]
+source_file="res://assets/textures/player/astro-farmer.png"
+dest_files=["res://.godot/imported/astro-farmer.png-43495c5a05aa3a476738c86d72031d29.ctex"]
 
 [params]
 

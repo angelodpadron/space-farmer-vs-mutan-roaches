@@ -1,6 +1,7 @@
 extends Control
 
 var main_menu="res://src/screens/menus/MainMenu.tscn"
+#@export var main_menu: PackedScene
 
 func _ready():
 	hide()
@@ -17,3 +18,4 @@ func _on_resume_pressed():
 func _on_main_menu_pressed():
 	get_tree().paused=false
 	get_tree().change_scene_to_file(main_menu)
+	#get_tree().change_scene_to_packed(main_menu)

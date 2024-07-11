@@ -40,14 +40,15 @@ func _on_detection_area_body_entered(player: Player):
 		is_beign_picked_up.emit()
 
 
-func _on_detection_area_body_exited(player: Player):
+func _on_detection_area_body_exited(_player):
 	if not is_collectable:
 		player_position = null
 
 
 func _on_body_entered(player: Player) -> void:
-	player.add_crop()
-	queue_free()
+	if is_collectable:
+		player.add_crop()
+		queue_free()
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

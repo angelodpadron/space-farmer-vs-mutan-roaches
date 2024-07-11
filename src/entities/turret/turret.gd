@@ -5,15 +5,13 @@ extends StaticBody2D
 @onready var fire_position = $%FirePosition
 @onready var fire_rate = $FireRate
 @onready var health_bar = $HealthBar
-@onready var audio_player = $AudioStreamPlayer
+@onready var audio_player = $ShootAudio
 @onready var sprite: Sprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var target: Cockroach
 var targets: Array[Cockroach]
 var projectile_container: Node
-
-var health: float = 50
 
 func fire():
 	audio_player.play()
@@ -28,9 +26,8 @@ func initialize(container: Node, spawn_position: Vector2) -> void:
 	container.add_child(self)
 	projectile_container = container
 	global_position = spawn_position
-	health_bar.init_health(health)
 	
-func _process(delta):
+func _process(_delta):
 	if target:
 		var direction = (target.global_position - fire_position.global_position).normalized()
 		sprite.rotation = lerp_angle(sprite.rotation, direction.angle(), 0.1)
@@ -55,14 +52,6 @@ func on_projectile_delete_request(projectile: TurretProjectile):
 	projectile_container.call_deferred("remove_child",projectile)
 	projectile.call_deferred("queue_free")
 	
-func notify_hit(damage_amount: float) -> void:
-	animation_player.play("hit")
-	health -= damage_amount
-	health_bar.health = health
-	
-	if health <= 0:
-		queue_free()
-	
 
 func _on_fire_rate_timeout():
 	fire()
@@ -72,3 +61,7 @@ func enable_hit_flash() -> void:
 	
 func disable_hit_flash() -> void:
 	sprite.material.set_shader_parameter("active", false)
+
+
+func _handle_dead():
+	queue_free()

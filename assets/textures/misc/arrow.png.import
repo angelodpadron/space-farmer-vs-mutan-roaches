@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jhf52clmg4fs"
-path="res://.godot/imported/mouth.png-fa1091c0a4086c89da62e43f394d1935.ctex"
+uid="uid://chrgfgfosa7yg"
+path="res://.godot/imported/arrow.png-3129a050df09332bceadfc7bcbe81c48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/planet/mouth.png"
-dest_files=["res://.godot/imported/mouth.png-fa1091c0a4086c89da62e43f394d1935.ctex"]
+source_file="res://assets/textures/misc/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-3129a050df09332bceadfc7bcbe81c48.ctex"]
 
 [params]
 

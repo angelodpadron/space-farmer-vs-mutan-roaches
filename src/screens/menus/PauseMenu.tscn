@@ -84,6 +84,7 @@ theme_override_font_sizes/font_size = 50
 text = "Main Menu"
 
 [node name="Control" parent="." instance=ExtResource("3_vh0xe")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

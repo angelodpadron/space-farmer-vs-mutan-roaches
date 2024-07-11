@@ -2,59 +2,53 @@ extends CharacterBody2D
 
 class_name Player
 
-# signals
-
-signal hit(amount)
+# signals (mediator pattern)
+signal health_changed(amount: int)
+signal initial_health(amount: int)
+signal died
 
 @export var speed: float = 250
 @export var turret_scene: PackedScene
 
-@onready var forward: Vector2 = Vector2.DOWN
-@onready var hitbox: CollisionShape2D = $Hitbox
-@onready var shader_material = $Sprite2D.material
-@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var health_component: HealthComponent = $HealthComponent
+
+const TURRET_COST: int = 5
 
 # movement
 
 var horizontal_dir: int = 0
 var vertical_dir: int = 0
 
-var dead: bool = false
-
-
 func _ready() -> void:
-	Global.player_died.connect(_on_player_died)
+	health_component.initial_health.connect(_emit_initial_health)
+	health_component.health_changed.connect(_emit_health_changed)
+	
+
+func _emit_initial_health(amount: int) -> void:
+	initial_health.emit(amount)
+
+func _emit_health_changed(amount: int) -> void:
+	health_changed.emit(amount)
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("place_turret") and Global.player_crop_amount > 0:
+	if Input.is_action_just_pressed("place_turret"):
 		_add_turret()
+			
 
 func add_crop() -> void:
 	Global.increase_crop_amount(1)
 
 func _add_turret() -> void:
-	var turret_instance = turret_scene.instantiate().initialize(get_parent(), hitbox.global_position + (forward * 20))
-	Global.decrease_crop_amount(1)
-	Global.increase_turret_amount(1)
-	
-	
-func notify_hit(damage_amount: int) -> void:	
-	hit.emit(damage_amount)
+	if Global.has_enough_crop(TURRET_COST):	
+			Global.decrease_crop_amount(TURRET_COST)
+			Global.increase_turret_amount(1)
+			turret_scene.instantiate().initialize(get_parent(), self.global_position + (Vector2.DOWN * 20))
+
 	
 	
 func _handle_dead() -> void:
-	set_physics_process(false)
-	collision_layer = 0
-	hide()
-	
-	
-func enable_hit_flash() -> void:
-	shader_material.set_shader_parameter("active", true)
-	
-	
-func disable_hit_flash() -> void:
-	shader_material.set_shader_parameter("active", false)	
+	died.emit()
+	queue_free()
 	
 	
 # State Machine Methods
@@ -62,24 +56,9 @@ func disable_hit_flash() -> void:
 func _handle_move_input() -> void:
 	horizontal_dir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	vertical_dir = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
-	var velocity: Vector2 = Vector2(horizontal_dir,vertical_dir).normalized() * speed
-
-	if velocity != Vector2.ZERO:
-		forward = velocity.normalized()
 	
-	set_velocity(velocity)
+	set_velocity(Vector2(horizontal_dir,vertical_dir).normalized() * speed)
 	
 
 func _apply_movement() -> void:
-	move_and_slide()	
-	
-	
-func _handle_hit(damage_amount: int) -> void:
-	Global.decrease_health(damage_amount)
-	
-	animation_player.play("hit")	
-	audio_player.play()
-	
-	
-func _on_player_died() -> void:
-	dead = true
+	move_and_slide()

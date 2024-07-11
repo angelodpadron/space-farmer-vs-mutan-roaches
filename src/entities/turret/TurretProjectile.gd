@@ -25,3 +25,9 @@ func _on_hitbox_body_entered(body):
 	if body.has_method("notify_hit"):
 		body.notify_hit(damage_amout)
 	emit_signal("delete_requested", self)
+
+
+func _on_hitbox_area_entered(area):
+	if area is HitboxComponent:
+		area.take_damage(damage_amout)
+	delete_requested.emit(self)

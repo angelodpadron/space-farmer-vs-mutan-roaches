@@ -28,7 +28,7 @@ func spawn_enemies() -> void:
 		var enemy_instance: Cockroach = new_enemy.instantiate()
 		add_child(enemy_instance)
 		enemy_instance.global_position = get_parent().global_position
-		enemy_instance.initialize(ship)
+		enemy_instance.initialize(ship.hitbox_component)
 		enemies_spawned += 1
 	else:
 		current_spawn_index += 1

@@ -1,11 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://uwe8qmpynkes"]
+[gd_scene load_steps=15 format=3 uid="uid://uwe8qmpynkes"]
 
 [ext_resource type="Script" path="res://src/entities/turret/Turret.gd" id="1_w6f2q"]
 [ext_resource type="PackedScene" uid="uid://dnk8ig02vhh7i" path="res://src/entities/turret/TurretProjectile.tscn" id="2_2m54x"]
 [ext_resource type="PackedScene" uid="uid://d31bhq6kvx634" path="res://src/screens/gui/Healthbar.tscn" id="3_tfabn"]
+[ext_resource type="Script" path="res://src/components/HitboxComponent.gd" id="4_6txc0"]
+[ext_resource type="Script" path="res://src/components/HealthComponent.gd" id="4_cp7ne"]
 [ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="4_khimo"]
+[ext_resource type="PackedScene" uid="uid://sp5n5keq64rl" path="res://src/components/DamageableSpriteComponent.tscn" id="5_7m62m"]
 [ext_resource type="Texture2D" uid="uid://dye16cxu54rb" path="res://assets/textures/turret/turret.png" id="5_vvil0"]
 [ext_resource type="AudioStream" uid="uid://hgf3thono5bk" path="res://assets/audio/sfx/shot.wav" id="6_4tkbk"]
+[ext_resource type="PackedScene" uid="uid://dj84r3r8qy3hy" path="res://src/components/HitAudioComponent.tscn" id="9_ey26w"]
+[ext_resource type="AudioStream" uid="uid://dfxd0pj06r0q6" path="res://assets/audio/sfx/mechanical-crate-pick-up.wav" id="10_fgglg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ftca4"]
 resource_local_to_scene = true
@@ -17,42 +22,10 @@ shader_parameter/active = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmckc"]
 radius = 213.338
 
-[sub_resource type="Animation" id="Animation_er1p7"]
-resource_name = "hit"
-length = 0.2
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"enable_hit_flash"
-}, {
-"args": [],
-"method": &"disable_hit_flash"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k0uae"]
-_data = {
-"hit": SubResource("Animation_er1p7")
-}
-
 [node name="Turret" type="StaticBody2D"]
 light_mask = 8
 script = ExtResource("1_w6f2q")
 PROJECTILE_SCENE = ExtResource("2_2m54x")
-
-[node name="HealthBar" parent="." instance=ExtResource("3_tfabn")]
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = -30.0
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
@@ -68,30 +41,53 @@ position = Vector2(12, 0)
 scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_tool7")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="Area" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, -34)
 shape = SubResource("CircleShape2D_cmckc")
+debug_color = Color(0.700006, 0.331466, 0.910953, 0.42)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="HealthBar" parent="." instance=ExtResource("3_tfabn")]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = -30.0
+MAX_VALUE = 3
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("4_cp7ne")
+MAX_HEALTH = 3
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("4_6txc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_tool7")
+
+[node name="DamageableSpriteComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_7m62m")]
+hit_shader = ExtResource("4_khimo")
+sprite = NodePath("../Sprite")
+
+[node name="HitAudioComponent" parent="." instance=ExtResource("9_ey26w")]
+hit_sound = ExtResource("10_fgglg")
+
+[node name="ShootAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_4tkbk")
 bus = &"Tools"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_k0uae")
-}
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered_detection_area"]
 [connection signal="body_exited" from="DetectionArea" to="." method="on_body_leaved_detection_area"]
+[connection signal="died" from="HealthComponent" to="." method="_handle_dead"]
+[connection signal="health_changed" from="HealthComponent" to="HealthBar" method="_set_health"]
+[connection signal="damage" from="HitboxComponent" to="DamageableSpriteComponent" method="play_animation"]
+[connection signal="damage" from="HitboxComponent" to="HitAudioComponent" method="play_hit_sound"]
+[connection signal="damaged" from="HitboxComponent" to="HealthBar" method="_set_health"]
+[connection signal="damaged" from="HitboxComponent" to="HealthComponent" method="take_damage"]

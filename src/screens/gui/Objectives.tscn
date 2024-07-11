@@ -10,9 +10,13 @@ script = ExtResource("1_6tybw")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ab73i")
 theme_override_font_sizes/font_size = 24
-text = "Objectives"
+text = "escape the planet!"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
 
 [node name="Details" type="Label" parent="."]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_ab73i")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
+text = "Example"

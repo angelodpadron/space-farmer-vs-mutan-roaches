@@ -1,8 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6pn4kb2uubvb"]
+[gd_scene load_steps=17 format=3 uid="uid://b6pn4kb2uubvb"]
 
 [ext_resource type="Script" path="res://src/entities/ship/Ship.gd" id="1_nws7o"]
 [ext_resource type="Texture2D" uid="uid://dwaq2oqfst04m" path="res://assets/textures/ship/spaceship.png" id="1_wqycs"]
+[ext_resource type="Script" path="res://src/components/HealthComponent.gd" id="2_3y4m4"]
+[ext_resource type="Shader" path="res://src/shaders/flash.gdshader" id="2_cxydi"]
+[ext_resource type="Script" path="res://src/components/HitboxComponent.gd" id="3_c1gwg"]
 [ext_resource type="PackedScene" uid="uid://di4pxunv1308r" path="res://src/utils/interaction/InteractionArea.tscn" id="3_ffxyv"]
+[ext_resource type="PackedScene" uid="uid://sp5n5keq64rl" path="res://src/components/DamageableSpriteComponent.tscn" id="4_q3q84"]
+[ext_resource type="PackedScene" uid="uid://dj84r3r8qy3hy" path="res://src/components/HitAudioComponent.tscn" id="8_8axgp"]
+[ext_resource type="AudioStream" uid="uid://dfxd0pj06r0q6" path="res://assets/audio/sfx/mechanical-crate-pick-up.wav" id="9_4hsky"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jskd"]
+shader = ExtResource("2_cxydi")
+shader_parameter/active = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kcwa3"]
 atlas = ExtResource("1_wqycs")
@@ -22,13 +32,70 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_usyst"]
 radius = 40.0125
 
+[sub_resource type="Animation" id="Animation_uu86w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pewn5"]
+resource_name = "rumble"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -0.5), Vector2(0, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rjo7w"]
+_data = {
+"RESET": SubResource("Animation_uu86w"),
+"rumble": SubResource("Animation_pewn5")
+}
+
 [node name="Ship" type="StaticBody2D" groups=["ship"]]
 collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_nws7o")
+crop_required = 5
+fuel_required = 25
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_6jskd")
 sprite_frames = SubResource("SpriteFrames_r2npw")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_3y4m4")
+MAX_HEALTH = 100
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("3_c1gwg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitboxComponent"]
+polygon = PackedVector2Array(0, -14, -13, 4, -13, 12, 13, 12, 13, 3)
+
+[node name="DamageableSpriteComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_q3q84")]
+hit_shader = ExtResource("2_cxydi")
+sprite = NodePath("../Sprite2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -14, -13, 4, -13, 12, 13, 12, 13, 3)
@@ -41,4 +108,15 @@ shape = SubResource("CircleShape2D_usyst")
 [node name="GenerationRate" type="Timer" parent="."]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rjo7w")
+}
+
+[node name="HitAudioComponent" parent="." instance=ExtResource("8_8axgp")]
+hit_sound = ExtResource("9_4hsky")
+
+[connection signal="damage" from="HitboxComponent" to="DamageableSpriteComponent" method="play_animation"]
+[connection signal="damage" from="HitboxComponent" to="HitAudioComponent" method="play_hit_sound"]
+[connection signal="damaged" from="HitboxComponent" to="HealthComponent" method="take_damage"]
 [connection signal="timeout" from="GenerationRate" to="." method="_on_generation_rate_timeout"]
