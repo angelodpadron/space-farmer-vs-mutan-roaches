@@ -23,10 +23,12 @@ radius = 108.0
 visibility_layer = 8
 position = Vector2(0, -9)
 collision_layer = 8
-collision_mask = 217
+collision_mask = 985
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_pu8oi")
+speed = 150.0
+damage_amount = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_d1q2j")

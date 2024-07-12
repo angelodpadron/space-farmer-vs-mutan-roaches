@@ -74,4 +74,5 @@ theme_override_fonts/font = ExtResource("2_55dvo")
 theme_override_font_sizes/font_size = 50
 text = "Main menu"
 
+[connection signal="pressed" from="Panel/VBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

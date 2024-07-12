@@ -31,3 +31,7 @@ func _on_player_win() -> void:
 	title.text = "You escaped!"
 	show()
 	get_tree().paused = true
+
+
+func _on_play_again_pressed():
+	get_tree().reload_current_scene()

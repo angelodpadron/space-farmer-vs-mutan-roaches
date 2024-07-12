@@ -67,6 +67,7 @@ shape = SubResource("CircleShape2D_uni74")
 debug_color = Color(0.70605, 0.339972, 0.882555, 0.42)
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_tgydi")]
+MAX_HEALTH = 50
 
 [node name="DamageableSpriteComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("12_702r8")]
 hit_shader = ExtResource("1_auksh")
