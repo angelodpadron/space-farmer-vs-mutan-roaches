@@ -61,7 +61,6 @@ MAX_VALUE = 3
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("4_cp7ne")
-MAX_HEALTH = 3
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_mask = 0

@@ -630,6 +630,7 @@ unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_mgp77")
 position = Vector2(-293, 130)
+scale = Vector2(3, 3)
 collision_mask = 928
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]

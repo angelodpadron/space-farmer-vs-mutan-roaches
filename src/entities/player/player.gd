@@ -11,6 +11,9 @@ signal died
 @export var turret_scene: PackedScene
 
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var body: Sprite2D = $%Body
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
 
 const TURRET_COST: int = 5
 
@@ -18,6 +21,7 @@ const TURRET_COST: int = 5
 
 var horizontal_dir: int = 0
 var vertical_dir: int = 0
+
 
 func _ready() -> void:
 	health_component.initial_health.connect(_emit_initial_health)
@@ -57,8 +61,20 @@ func _handle_move_input() -> void:
 	horizontal_dir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	vertical_dir = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	
-	set_velocity(Vector2(horizontal_dir,vertical_dir).normalized() * speed)
+	var new_speed = Vector2(horizontal_dir,vertical_dir).normalized() * speed
 	
+	if new_speed != Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", new_speed)
+		animation_tree.set("parameters/Walk/blend_position", new_speed)
+		animation_state.travel("Walk")
+	else:
+		animation_state.travel("Idle")
+		
+		
+		
+	
+	set_velocity(new_speed)
+
 
 func _apply_movement() -> void:
 	move_and_slide()

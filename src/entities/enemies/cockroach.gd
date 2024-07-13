@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Cockroach
 
 @export var speed: float = 100
-@export var damage_amount: int = 1
+@export var damage_amount: int = 3
 
 @onready var attack_rate: Timer = $AttackRate
 @onready var body_sprite: Sprite2D = $Sprite2D

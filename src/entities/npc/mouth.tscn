@@ -212,6 +212,7 @@ scale = Vector2(2, 2)
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_4rw1f")
+max_spawn_count = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
